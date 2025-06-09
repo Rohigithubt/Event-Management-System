@@ -5,9 +5,8 @@ import Sidebar from './Sidebar'
 const Footer = () => {
   return (
     <div>
-      <Header/>
-      <Sidebar/>
-      <h1>hey </h1>
+      
+      <h5 className='-mb-10'><center>Copyright © 2025 Trueyou.Club All Rights Reserved</center> </h5>
     </div>
   )
 }
