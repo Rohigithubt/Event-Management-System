@@ -1,84 +1,103 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/admin/Footer';
-import img from '../assets/images/image.png'; 
-
+import bannerImg from '../assets/images/banner-bg.png';
+import noImg from '../assets/images/no-image.jpg'
 const HomeSeminar = () => {
   const [seminars, setSeminars] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
-      const mockSeminars = [
+      const backendSeminars = [
         {
           id: 1,
-          title: 'Future of Quantum Tech',
-          imageUrl: '/assets/images/quantum.jpg',
-          location: 'Delhi Convention Center',
-          date: '2025-07-20',
-          time: '10:00 AM - 1:00 PM',
+          title: 'Innovations in Renewable Energy',
+          imageUrl: '/assets/images/seminar1.jpg',
+          location: 'GreenTech Hall, Mumbai',
+          date: '2025-08-12',
+          time: '9:00 AM - 12:00 PM',
         },
         {
           id: 2,
-          title: 'Cybersecurity in AI',
-          imageUrl: '/assets/images/cyber.jpg',
-          location: 'Bangalore Expo Hall',
-          date: '2025-07-25',
-          time: '2:00 PM - 5:00 PM',
+          title: 'AI-Powered Healthcare',
+          imageUrl: '/assets/images/seminar2.jpg',
+          location: 'MedTech Auditorium, Pune',
+          date: '2025-08-20',
+          time: '11:00 AM - 2:00 PM',
         },
       ];
-
-      setSeminars(mockSeminars);
+      setSeminars(backendSeminars);
       setLoading(false);
     }, 1000);
   }, []);
 
   return (
-    <div className="min-h-screen ml-0 bg-gray-50 mt-14">
+    <div className="min-h-screen bg-gray-50 mt-18">
       <div className="relative h-[300px] md:h-[400px] w-full mb-10">
         <img
-          src={img}
+          src={bannerImg}
           alt="Seminar Banner"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 flex items-center justify-center px-4">
+
+        <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-between px-6 md:px-16">
           <h1
-            className="text-[40px] md:text-[60px] font-extrabold bg-clip-text  text-center leading-tight"
+            className="w-full md:w-1/2 text-[28px] md:text-[40px] font-semibold bg-clip-text text-transparent leading-tight"
+            style={{
+              backgroundImage: `url(${bannerImg})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              color: 'black'
+            }}
           >
-            Explore Upcoming Seminars & Secure Your Spot!
+            EMSystem: Empowering you to realize your potential through seamless event experiences.
           </h1>
+
+          <div className="bg-[#e4f3dd] border-[11px] border-[#e4f3dd] border-b-0 rounded-t-[348px] border-t-[14px] h-[290px] mt-27 ml-auto max-w-[310px] overflow-hidden">
+            <img
+              src={noImg}
+              alt="Event Illustration"
+            />
+          </div>
+
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="p-6 max-w-7xl mx-auto">
         {loading ? (
           <p className="text-center text-gray-500">Loading seminars...</p>
         ) : seminars.length === 0 ? (
           <p className="text-center text-gray-600 text-lg">
-            Stay tuned! Exciting seminars will be announced soon.
+            No seminars available at the moment.
           </p>
         ) : (
-          <div className="space-y-6 max-w-5xl mx-auto">
+          <div className="space-y-6">
             {seminars.map((seminar) => (
               <div
                 key={seminar.id}
-                className="bg-white shadow-md rounded-lg flex flex-col md:flex-row items-center md:items-start p-4"
+                className="bg-white border border-gray-300 rounded-lg flex flex-col md:flex-row items-center md:items-start p-4"
               >
-                <img
-                  src={seminar.imageUrl}
-                  alt={seminar.title}
-                  className="w-full md:w-48 h-40 object-cover rounded mb-4 md:mb-0 md:mr-6"
-                />
-                <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-blue-700">{seminar.title}</h2>
-                  <p className="text-gray-600">📍 {seminar.location}</p>
-                  <p className="text-gray-600">🕒 {seminar.date} | {seminar.time}</p>
+                <div className="flex flex-col md:flex-row md:items-center w-full">
+                  <img
+                    src={seminar.imageUrl}
+                    alt={seminar.title}
+                    className="w-full md:w-48 h-40 object-cover rounded mb-4 md:mb-0 md:mr-6"
+                  />
+                  <div className="flex-1 space-y-1">
+                    <h2 className="text-xl font-bold text-black-700">{seminar.title}</h2>
+                    <p className="text-gray-600">📍 {seminar.location}</p>
+                    <p className="text-gray-600">🗓 {seminar.date}</p>
+                    <p className="text-gray-600">🕒 {seminar.time}</p>
+                  </div>
+                  <div className="mt-4 md:mt-0 md:ml-auto">
+                    <button
+                      onClick={() => alert(`Booking ticket for ${seminar.title}`)}
+                      className="text-black px-5 py-2 rounded bg-blue-200 hover:bg-blue-700 transition"
+                    >
+                      Book Seats
+                    </button>
+                  </div>
                 </div>
-                <button
-                  onClick={() => alert(`Booking ticket for ${seminar.title}`)}
-                  className="mt-4 md:mt-0 md:ml-6 bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition"
-                >
-                  Book Ticket
-                </button>
               </div>
             ))}
           </div>

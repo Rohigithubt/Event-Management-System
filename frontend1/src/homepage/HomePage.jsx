@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <HomeHeader />
-      <main className="flex-1 p-4 bg-gray-100 overflow-auto">
+      <main className="flex-1 p-0 bg-gray-100 overflow">
        <Outlet />
       </main>
     </div>

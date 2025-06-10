@@ -6,7 +6,7 @@ const HomeHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-   <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md py-4 px-6">
+   <header className="fixed top-0 left-0 w-full z-50  border border-gray-300 bg-white py-6 px-6">
 
       <div className="flex justify-between items-center">
         <div className="text-2xl ml-5 font-bold text-black-600">
@@ -29,10 +29,10 @@ const HomeHeader = () => {
         </nav>
 
         <div className="hidden md:flex space-x-3">
-          <Link to="/login" className="px-4 py-2 bg-blue-200 text-blue-600 rounded hover:bg-blue-600 hover:text-amber-50 transition">
+          <Link to="/login" className="px-4 py-2 bg-blue-200 text-balck rounded-full w-22 pl-6 hover:bg-blue-600 hover:text-white transition">
             Login
           </Link>
-          <Link to="/signup" className="px-4 py-2 bg-blue-200 text-blue-600 rounded hover:bg-blue-600 hover:text-amber-50 transition">
+          <Link to="/signup" className="px-4 py-2 bg-blue-200 text-black rounded-full w-22 pl-5 hover:bg-blue-600 hover:text-amber-50 transition">
             Signup
           </Link>
         </div>
@@ -47,7 +47,7 @@ const HomeHeader = () => {
           <Link to="/news" className="block text-gray-700 hover:text-blue-600">News</Link>
           <Link to="/contact" className="block text-gray-700 hover:text-blue-600">Contact Us</Link>
           <div className="pt-2 space-x-2">
-            <Link to="/login" className="inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+            <Link to="/login" className="inline-block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
               Login
             </Link>
             <Link to="/signup" className="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded hover:bg-blue-200 transition">
