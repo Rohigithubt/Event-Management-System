@@ -55,7 +55,7 @@ const SignUp = () => {
                 className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <button style={{background:'#006AF2'}}
+            <button style={{ background: '#006AF2' }}
               type="submit"
               className="w-full bg-blue-600 text-white font-bold py-2 mt-7 m-4 ml-0 rounded hover:bg-blue-700 transition"
             >

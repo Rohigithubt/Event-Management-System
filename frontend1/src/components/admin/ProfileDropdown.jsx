@@ -32,7 +32,7 @@ const ProfileDropdown = () => {
             <li className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 cursor-pointer font-semibold text-base">
               <FiUser className="text-lg" />
               <Link to='/profile-details'>
-              <span>Profile</span></Link>
+                <span>Profile</span></Link>
             </li>
             <li className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 cursor-pointer font-semibold text-base">
               <FiLogOut className="text-lg" />

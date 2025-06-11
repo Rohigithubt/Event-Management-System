@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 const Sidebar = ({ isOpen }) => {
   return (
     <div
-      className={`fixed top-14 left-0 h-full bg-white text-white shadow-xl transition-all duration-300 z-20 ${
-        isOpen ? 'w-64 px-5 py-6' : 'w-0 overflow-hidden'
-      }`}
+      className={`fixed top-20.5 left-0 bg-white  text-white shadow-xl transition-all duration-300 overflow-y-auto h-[calc(100vh-56px)] ${isOpen ? 'w-74 px-5 py-6' : 'w-0'
+        }`}
     >
       <ul className="space-y-7 mt-20">
         <li>
@@ -19,6 +18,8 @@ const Sidebar = ({ isOpen }) => {
             <span className="text-black font-normal">Dashboard</span>
           </Link>
         </li>
+       
+        
         <li>
           <Link
             to="/webinar"

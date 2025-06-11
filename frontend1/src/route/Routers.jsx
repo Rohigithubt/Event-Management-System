@@ -19,6 +19,9 @@ import HomeSeminar from '../homepage/HomeSeminar'
 import HomeNews from '../homepage/HomeNews'
 import HomeContactus from '../homepage/HomeContactus'
 import Notfound from '../Notfound'
+import AboutUs from '../homepage/AboutUs'
+import LoginHome from '../homepage/home-auth/LoginHome'
+import SignupHome from '../homepage/home-auth/SignupHome'
 
 
 const Routers = () => {
@@ -46,6 +49,17 @@ const Routers = () => {
         </Route>
          <Route path="/home-contact" element={<HomePage />}>
           <Route index element={<HomeContactus />} />
+        </Route>
+        <Route path="/about-home" element={<HomePage />}>
+          <Route index element={<AboutUs />} />
+        </Route>
+
+         <Route path="/login-home" element={<HomePage />}>
+          <Route index element={<LoginHome />} />
+        </Route>
+        
+         <Route path="/signup-home" element={<HomePage />}>
+          <Route index element={<SignupHome />} />
         </Route>
 
         <Route path='/' element={<Home />} />

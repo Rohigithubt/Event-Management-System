@@ -8,9 +8,7 @@ const ProfileDetails = () => {
     phone: '',
   });
 
-  // Simulate API call for profile fetch
   useEffect(() => {
-    // Replace this with actual API call
     const fetchProfile = async () => {
       const data = {
         firstName: 'Super',
@@ -31,13 +29,11 @@ const ProfileDetails = () => {
 
   const handleUpdate = async () => {
     console.log('Submit to API:', form);
-    // Use fetch or axios to submit `form` to backend
   };
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg max-w-6xl mx-auto mt-6">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-10">
-        {/* Avatar */}
         <div className="flex flex-col items-center bg-gray-50 p-6 rounded-lg border w-full md:w-1/3">
           <div className="w-40 h-40 rounded-full border-4 border-gray-300 flex items-center justify-center">
             <svg
@@ -59,7 +55,6 @@ const ProfileDetails = () => {
           </button>
         </div>
 
-        {/* Profile Details Form */}
         <div className="w-full md:w-2/3 space-y-4 border rounded-lg p-6">
           <h2 className="text-2xl font-semibold border-b-2 border-blue-500 inline-block mb-4">
             Profile Details
@@ -78,9 +73,8 @@ const ProfileDetails = () => {
                 name={name}
                 value={form[name]}
                 onChange={handleChange}
-                className={`flex-1 w-full mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 border rounded ${
-                  name === 'email' ? 'bg-gray-100' : ''
-                }`}
+                className={`flex-1 w-full mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 border rounded ${name === 'email' ? 'bg-gray-100' : ''
+                  }`}
                 disabled={name === 'email'}
                 placeholder={label}
               />

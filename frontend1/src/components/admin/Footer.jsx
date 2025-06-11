@@ -5,8 +5,8 @@ import Sidebar from './Sidebar'
 const Footer = () => {
   return (
     <div>
-      
-      <h5 className='mb-5'><center>Copyright © 2025 Trueyou.Club All Rights Reserved</center> </h5>
+
+      <h5 className='mb-5 bg-white'><center>Copyright © 2025 EMSystem All Rights Reserved</center> </h5>
     </div>
   )
 }

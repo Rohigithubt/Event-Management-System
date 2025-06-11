@@ -10,63 +10,63 @@ const HomeNews = () => {
   useEffect(() => {
     setTimeout(() => {
       const backendnews = [
-  {
-    id: 1,
-    title: 'India Launches Ambitious Moon Mission',
-    imageUrl: '',
-    createBy: 'Anjali Mehta',
-    date: '2025-09-01',
-    description: 'The Indian Space Research Organisation (ISRO) has successfully launched its next lunar mission, aiming for a soft landing near the moon’s south pole.',
-  },
-  {
-    id: 2,
-    title: 'Global Markets Rally Amid Economic Optimism',
-    imageUrl: '',
-    createBy: 'Rajeev Khanna',
-    date: '2025-09-03',
-    description: 'Stock markets across the world saw a significant boost as investors welcomed positive economic indicators and central bank signals.',
-  },
-  {
-    id: 3,
-    title: 'Breakthrough in Alzheimer’s Research',
-    imageUrl: '',
-    createBy: 'Dr. Kavita Rao',
-    date: '2025-09-04',
-    description: 'Researchers have discovered a potential treatment that could slow the progression of Alzheimer’s disease, offering hope to millions.',
-  },
-  {
-    id: 4,
-    title: 'Massive Floods Hit Northern India',
-    imageUrl: '',
-    createBy: 'Saurabh Thakur',
-    date: '2025-09-05',
-    description: 'Heavy monsoon rains have led to severe flooding across several northern states, displacing thousands and damaging infrastructure.',
-  },
-  {
-    id: 5,
-    title: 'Tech Giants Face New Data Privacy Laws',
-    imageUrl: '',
-    createBy: 'Ritika Desai',
-    date: '2025-09-06',
-    description: 'A new bill passed in parliament will tighten data privacy regulations for tech companies operating in India.',
-  },
-  {
-    id: 6,
-    title: 'Major Sporting Event Announced for 2026',
-    imageUrl: '',
-    createBy: 'Vikram Singh',
-    date: '2025-09-07',
-    description: 'The Indian government has confirmed that it will host a major international multi-sport event in 2026, boosting sports infrastructure.',
-  },
-  {
-    id: 7,
-    title: 'Scientists Warn of Record-Breaking Heatwave',
-    imageUrl: '',
-    createBy: 'Nisha Goyal',
-    date: '2025-09-08',
-    description: 'Climate scientists have issued a warning for an unprecedented heatwave expected to hit parts of South Asia this summer.',
-  }
-];
+        {
+          id: 1,
+          title: 'India Launches Ambitious Moon Mission',
+          imageUrl: '',
+          createBy: 'Anjali Mehta',
+          date: '2025-09-01',
+          description: 'The Indian Space Research Organisation (ISRO) has successfully launched its next lunar mission, aiming for a soft landing near the moon’s south pole.',
+        },
+        {
+          id: 2,
+          title: 'Global Markets Rally Amid Economic Optimism',
+          imageUrl: '',
+          createBy: 'Rajeev Khanna',
+          date: '2025-09-03',
+          description: 'Stock markets across the world saw a significant boost as investors welcomed positive economic indicators and central bank signals.',
+        },
+        {
+          id: 3,
+          title: 'Breakthrough in Alzheimer’s Research',
+          imageUrl: '',
+          createBy: 'Dr. Kavita Rao',
+          date: '2025-09-04',
+          description: 'Researchers have discovered a potential treatment that could slow the progression of Alzheimer’s disease, offering hope to millions.',
+        },
+        {
+          id: 4,
+          title: 'Massive Floods Hit Northern India',
+          imageUrl: '',
+          createBy: 'Saurabh Thakur',
+          date: '2025-09-05',
+          description: 'Heavy monsoon rains have led to severe flooding across several northern states, displacing thousands and damaging infrastructure.',
+        },
+        {
+          id: 5,
+          title: 'Tech Giants Face New Data Privacy Laws',
+          imageUrl: '',
+          createBy: 'Ritika Desai',
+          date: '2025-09-06',
+          description: 'A new bill passed in parliament will tighten data privacy regulations for tech companies operating in India.',
+        },
+        {
+          id: 6,
+          title: 'Major Sporting Event Announced for 2026',
+          imageUrl: '',
+          createBy: 'Vikram Singh',
+          date: '2025-09-07',
+          description: 'The Indian government has confirmed that it will host a major international multi-sport event in 2026, boosting sports infrastructure.',
+        },
+        {
+          id: 7,
+          title: 'Scientists Warn of Record-Breaking Heatwave',
+          imageUrl: '',
+          createBy: 'Nisha Goyal',
+          date: '2025-09-08',
+          description: 'Climate scientists have issued a warning for an unprecedented heatwave expected to hit parts of South Asia this summer.',
+        }
+      ];
       setNews(backendnews);
       setLoading(false);
     }, 1000);
@@ -120,17 +120,17 @@ const HomeNews = () => {
 
                   <div className="flex justify-items-start gap-4 items-center text-sm text-gray-600 mb-2">
                     <div className="flex items-center gap-1">
-         <ion-icon name="person-outline"></ion-icon>
+                      <ion-icon name="person-outline"></ion-icon>
                       <span><b>{data.createBy}</b></span>
                     </div>
                     <div className="flex items-center gap-1">
-<ion-icon name="calendar-outline"></ion-icon>                      <span><b>{data.date}</b></span>
+                      <ion-icon name="calendar-outline"></ion-icon>                      <span><b>{data.date}</b></span>
                     </div>
                   </div>
 
                   <p className="text-gray-700 text-md flex-grow">{data.description}</p>
 
-                  <button className="mt-4 justify-center  bg-gray-300 text-black rounded-full hover:bg-blue-600 hover:text-black transition">
+                  <button className="mt-4 justify-center  bg-gray-100 text-black rounded-full hover:bg-[#006AF2] hover:text-white transition">
                     Read More
                   </button>
                 </div>

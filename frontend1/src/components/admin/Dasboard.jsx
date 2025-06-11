@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Dashboard = () => {
-  // Dummy data
   const webinars = [
     { id: 1, title: 'React Basics', date: '2025-06-01' },
     { id: 2, title: 'Advanced Redux', date: '2025-06-10' },
@@ -14,7 +13,7 @@ const Dashboard = () => {
 
   return (
     <div className="p-6 space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white shadow rounded-xl p-4 text-center">
           <h2 className="text-xl font-bold text-gray-800">Total Users</h2>
           <p className="text-2xl text-blue-600 mt-2">320</p>
@@ -44,7 +43,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-       <div className="bg-white shadow rounded-xl p-6">
+      <div className="bg-white shadow rounded-xl p-6">
         <h3 className="text-xl font-semibold mb-4">Upcoming Webinars</h3>
         <ul className="space-y-3">
           {webinars.map((webinar) => (
@@ -55,7 +54,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-       <div className="bg-white shadow rounded-xl p-6">
+      <div className="bg-white shadow rounded-xl p-6">
         <h3 className="text-xl font-semibold mb-4">Upcoming Webinars</h3>
         <ul className="space-y-3">
           {webinars.map((webinar) => (
@@ -66,7 +65,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-       <div className="bg-white shadow rounded-xl p-6">
+      <div className="bg-white shadow rounded-xl p-6">
         <h3 className="text-xl font-semibold mb-4">Upcoming Webinars</h3>
         <ul className="space-y-3">
           {webinars.map((webinar) => (
@@ -77,7 +76,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-       <div className="bg-white shadow rounded-xl p-6">
+      <div className="bg-white shadow rounded-xl p-6">
         <h3 className="text-xl font-semibold mb-4">Upcoming Webinars</h3>
         <ul className="space-y-3">
           {webinars.map((webinar) => (
@@ -88,7 +87,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-       <div className="bg-white shadow rounded-xl p-6">
+      <div className="bg-white shadow rounded-xl p-6">
         <h3 className="text-xl font-semibold mb-4">Upcoming Webinars</h3>
         <ul className="space-y-3">
           {webinars.map((webinar) => (
@@ -99,7 +98,7 @@ const Dashboard = () => {
           ))}
         </ul>
       </div>
-      
+
 
       <div className="bg-white shadow rounded-xl p-6">
         <h3 className="text-xl font-semibold mb-4">Upcoming Seminars</h3>

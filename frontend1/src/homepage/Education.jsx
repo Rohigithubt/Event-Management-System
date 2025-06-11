@@ -96,7 +96,7 @@ const Education = () => {
 
                   <div className="flex justify-items-start gap-4 items-center text-sm text-gray-600 mb-2">
                     <div className="flex items-center gap-1">
-                               <ion-icon name="person-outline"></ion-icon>
+                      <ion-icon name="person-outline"></ion-icon>
 
                       <span><b>{edu.createBy}</b></span>
                     </div>
@@ -108,7 +108,7 @@ const Education = () => {
 
                   <p className="text-gray-700 text-md flex-grow">{edu.description}</p>
 
-                  <button className="mt-4 justify-center  bg-[#006af2]-300 text-black rounded-full hover:bg-blue-600 hover:text-black transition">
+                  <button className="mt-4 justify-center  bg-gray-100 text-black rounded-full hover:bg-[#006AF2] hover:text-white transition">
                     Read More
                   </button>
                 </div>

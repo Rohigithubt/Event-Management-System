@@ -92,7 +92,7 @@ const HomeSeminar = () => {
                   <div className="mt-4 md:mt-0 md:ml-auto">
                     <button
                       onClick={() => alert(`Booking ticket for ${seminar.title}`)}
-                      className="text-black px-5 py-2 rounded bg-blue-200 hover:bg-blue-700 transition"
+                      className="text-black bg-gray-100 px-5 py-2 rounded-full hover:bg-[#006AF2] hover:text-white transition"
                     >
                       Book Seats
                     </button>

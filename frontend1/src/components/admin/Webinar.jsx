@@ -76,26 +76,23 @@ const Webinar = () => {
           return (
             <div
               key={webinar.id}
-              className={`flex justify-between items-center p-3 rounded-lg ${
-                expired ? 'bg-red-50' : 'bg-green-50'
-              }`}
+              className={`flex justify-between items-center p-3 rounded-lg ${expired ? 'bg-red-50' : 'bg-green-50'
+                }`}
             >
               <div>
                 <h2 className="text-lg font-semibold">{webinar.title}</h2>
                 <p
-                  className={`text-sm ${
-                    expired ? 'text-red-600' : 'text-green-600'
-                  }`}
+                  className={`text-sm ${expired ? 'text-red-600' : 'text-green-600'
+                    }`}
                 >
                   {expired ? 'Expired' : 'Upcoming'} on {webinar.date}
                 </p>
               </div>
               <span
-                className={`px-3 py-1 text-sm rounded-full ${
-                  expired
+                className={`px-3 py-1 text-sm rounded-full ${expired
                     ? 'bg-red-200 text-red-800'
                     : 'bg-green-200 text-green-800'
-                }`}
+                  }`}
               >
                 {expired ? 'Expired' : 'Upcoming'}
               </span>
