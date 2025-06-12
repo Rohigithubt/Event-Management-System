@@ -1,91 +1,190 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import noImg from "../../assets/images/no-image.jpg";
+import Footer from '../../components/admin/Footer';
+import { Link } from "react-router-dom";
+
+const Seminars = [
+  {
+    id: 1,
+    title: "Zsdas",
+    location: "ryfvryfr",
+    date: "18 June 2025 00:00",
+    endTime: "18 June 2025 00:01",
+    status: "upcoming",
+    imageUrl: null,
+  },
+  {
+    id: 2,
+    title: "Technology And Innovation",
+    location: "aveegvfegf e",
+    date: "12 September 2024 14:00",
+    endTime: "12 September 2024 19:00",
+    status: "expired",
+    imageUrl: null,
+  },
+  {
+    id: 3,
+    title: "Education And Learning",
+    location: "qwwdwedewfe",
+    date: "11 September 2024 21:00",
+    endTime: "11 September 2024 22:01",
+    status: "expired",
+    imageUrl: null,
+  },
+  {
+    id: 4,
+    title: "Creative Arts And Media",
+    location: "ergtgtgbrtj",
+    date: "11 September 2024 16:00",
+    endTime: "11 September 2024 16:46",
+    status: "expired",
+    imageUrl: null,
+  },
+  {
+    id: 5,
+    title: "Efrrg",
+    location: "aewefrfrgf",
+    date: "18 June 2025 00:00",
+    endTime: "18 June 2025 00:01",
+    status: "upcoming",
+    imageUrl: null,
+  },
+];
 
 const Seminar = () => {
-  const [seminars, setSeminars] = useState([
-    { id: 1, topic: 'AI in Education', date: '2025-06-15', location: 'Delhi' },
-    { id: 2, topic: 'Cybersecurity Trends', date: '2025-07-01', location: 'Mumbai' },
-  ]);
-  const [showForm, setShowForm] = useState(false);
-  const [newTopic, setNewTopic] = useState('');
-  const [newDate, setNewDate] = useState('');
-  const [newLocation, setNewLocation] = useState('');
+  const [timers, setTimers] = useState({});
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const handleAddSeminar = () => {
-    if (!newTopic || !newDate || !newLocation) return;
-
-    const newSeminar = {
-      id: Date.now(),
-      topic: newTopic,
-      date: newDate,
-      location: newLocation,
-    };
-
-    setSeminars((prev) => [...prev, newSeminar]);
-    setNewTopic('');
-    setNewDate('');
-    setNewLocation('');
-    setShowForm(false);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newTimers = {};
+      Seminars.forEach((Seminar) => {
+        if (Seminar.status === "upcoming") {
+          const diff = new Date(Seminar.date) - new Date();
+          if (diff > 0) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            newTimers[Seminar.id] = { days, hours, minutes, seconds };
+          }
+        }
+      });
+      setTimers(newTimers);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-base font-bold">Seminar List</h1>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="bg-blue-600 text-black px-4 py-2 rounded-md hover:bg-blue-700"
-        >
-          {showForm ? 'Cancel' : 'Add Seminar'}
-        </button>
-      </div>
-
-      {showForm && (
-        <div className="mb-4 bg-gray-100 p-4 rounded-lg space-y-3">
-          <input
-            type="text"
-            placeholder="Seminar Topic"
-            value={newTopic}
-            onChange={(e) => setNewTopic(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md"
-          />
-          <input
-            type="date"
-            value={newDate}
-            onChange={(e) => setNewDate(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md"
-          />
-          <input
-            type="text"
-            placeholder="Location"
-            value={newLocation}
-            onChange={(e) => setNewLocation(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md"
-          />
-          <button
-            onClick={handleAddSeminar}
-            className="bg-green-600 text-black px-4 py-2 rounded-md hover:bg-green-700"
-          >
-            Add Seminar
+    <div className="p-4 sm:p-6 !space-y-5 max-w-screen-2xl">
+      <div className="border border-gray-300 p-5 rounded-lg">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+          <h1 className="!text-2xl font-bold text-gray-800">Seminars List</h1>
+          <button className="bg-blue-600 text-white font-semibold !px-8 py-2 !rounded-full shadow-xl hover:bg-blue-700">
+            + Add
           </button>
         </div>
-      )}
+        <div className="h-20 w-full rounded-lg mb-7 border border-gray-300">
+          <input
+            type="text"
+            placeholder="select Date"
+            className="w-full sm:max-w-md ml-4 mt-4 px-4 py-2 border border-gray-300 rounded"
+          />
+          <button className="bg-[#006AF2] text-white !rounded-full ml-4 shadow-xl">Submit</button>
+          <button className="bg-black text-white !rounded-full ml-4 w-25 shadow-xl">Reset</button>
+        </div>
 
-      <div className="bg-white rounded-xl shadow p-4 space-y-4">
-        {seminars.length === 0 ? (
-          <p className="text-gray-500">No seminars available.</p>
-        ) : (
-          seminars.map((seminar) => (
-            <div
-              key={seminar.id}
-              className="border border-gray-200 rounded-md p-4 hover:shadow"
-            >
-              <h2 className="text-lg font-semibold">{seminar.topic}</h2>
-              <p className="text-sm text-gray-600">📍 {seminar.location}</p>
-              <p className="text-sm text-gray-500">📅 {seminar.date}</p>
-            </div>
-          ))
-        )}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+          <p>Show</p>
+          <select
+            value={itemsPerPage}
+            onChange={(e) => setItemsPerPage(Number(e.target.value))}
+            className="px-4 py-2 border border-gray-300 rounded"
+          >
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={30}>30</option>
+          </select>
+          <p>entries</p>
+
+          <input
+            type="text"
+            placeholder="Search By Title, Date"
+            className="w-full sm:max-w-md ml-112 px-4 py-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {Seminars.map((Seminar) => {
+            const timer = timers[Seminar.id];
+            const isExpired = Seminar.status === "expired";
+            return (
+              <div
+                key={Seminar.id}
+                className={`relative border border-gray-300 rounded-lg h-60 p-7 bg-white transition ${isExpired ? "opacity-50 pointer-events-none select-none" : ""
+                  }`}
+              >
+                {isExpired && (
+                  <div className="absolute top-0 left-0 bg-blue-400 text-white text-xs font-semibold px-2 py-1 rounded-tr-md rounded-bl-md">
+                    Expired Seminar
+                  </div>
+                )}
+
+                <div className="flex flex-col md:flex-row gap-4">
+                  <div className="w-full md:w-42">
+                    <img
+                      src={Seminar.imageUrl || noImg}
+                      alt="Seminar"
+                      className="w-full h-42 object-cover rounded"
+                    />
+                    <Link
+                      to="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="absolute top-[185px] left-[39px] min-w-[150px] font-semibold font-['Roboto'] hover:bg-[#0A2540] hover:text-white bg-[#f5f7f9] text-[11px] px-[7px] py-[9px] rounded-[20px] border border-[#9a9da129] shadow-none cursor-pointer inline-block text-center align-middle transition-all duration-150 no-underline"
+                    >
+                      <span className="m-2 border border-black rounded-full p-1 bg-[#0659c5] text-white"> 0 / 44 </span>
+                      Available Tickets
+                    </Link>
+
+
+
+                  </div>
+
+                  <div className="flex-1">
+                    <h2 className="text-xl font-semibold text-gray-800">
+                      {Seminar.title}
+                    </h2>
+
+                    <p className="text-sm text-[#DA7821] font-medium mb-2">
+                      <ion-icon name="location-outline"></ion-icon> {Seminar.location}
+                    </p>
+
+                    <p className="text-sm text-black font-medium mb-2">
+                      <ion-icon name="calendar-outline"></ion-icon> {Seminar.date} - {Seminar.endTime}
+                    </p>
+
+                    {Seminar.status === "upcoming" && timer && (
+                      <div className="grid grid-cols-4 gap-2 text-center mb-2">
+                        {Object.entries(timer).map(([label, value]) => (
+                          <div
+                            key={label}
+                            className="bg-[#e2e8f0] rounded p-1 text-xs"
+                          >
+                            <p className="font-semibold text-black text-sm">{value}</p>
+                            <p className="text-gray-500 capitalize">{label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

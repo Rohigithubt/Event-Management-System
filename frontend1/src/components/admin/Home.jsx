@@ -14,7 +14,7 @@ const Home = ({ children }) => {
       <Sidebar isOpen={isSidebarOpen} />
       <div className={`flex flex-col flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-0' : 'ml-0'}`}>
         <Header toggleSidebar={toggleSidebar} />
-        <main className="p-4 bg-gray-100 h-full flex overflow-auto"> <div className={`flex flex-col flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}> {children}</div></main>
+        <main className="p-4 bg-white h-full flex overflow-auto"> <div className={`flex flex-col flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-74' : 'ml-0'}`}> {children}</div></main>
       </div>
     </div>
   );

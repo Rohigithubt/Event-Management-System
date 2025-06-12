@@ -9,9 +9,13 @@ const Header = ({ toggleSidebar }) => {
       className="px-4 py-5.5 flex items-center justify-between text-white border border-gray-300 relative"
     >
       <div className="text-2xl font-bold text-black">EMSystem</div>
-      <button onClick={toggleSidebar} className="text-2xl text-black mr-250">
-        <RiMenuLine />
+      <button
+        onClick={toggleSidebar}
+        className="p-3 text-black mr-240 rounded-md"
+      >
+        <RiMenuLine className="text-xl" />
       </button>
+
 
       <div className="hidden lg:block">
         <ProfileDropdown />

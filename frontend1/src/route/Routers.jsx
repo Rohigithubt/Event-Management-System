@@ -22,6 +22,7 @@ import Notfound from '../Notfound'
 import AboutUs from '../homepage/AboutUs'
 import LoginHome from '../homepage/home-auth/LoginHome'
 import SignupHome from '../homepage/home-auth/SignupHome'
+import News from '../components/admin/News'
 
 
 const Routers = () => {
@@ -65,6 +66,7 @@ const Routers = () => {
         <Route path='/' element={<Home />} />
         <Route path="/dashboard" element={<Home><Dashboard /></Home>} />
         <Route path="/webinar" element={<Home><Webinar /></Home>} />
+          <Route path="/news" element={<Home><News /></Home>} />
         <Route path='/footer' element={<Footer />} />
         <Route path='/event-list' element={<Home><EventList /></Home>} />
         <Route path='/volunteer-list' element={<Home><VolunteerList /></Home>} />
