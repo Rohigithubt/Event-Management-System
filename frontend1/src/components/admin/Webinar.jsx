@@ -70,11 +70,11 @@ const Webinar = () => {
   }, []);
 
   return (
-    <div className="p-4 sm:p-6 !space-y-5 max-w-screen-2xl">
+    <div className="p-4 sm:p-6 space-y-5 max-w-screen-2xl mx-auto">
       <div className="border border-gray-300 p-5 rounded-lg">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
-          <h1 className="!text-2xl font-bold text-gray-800">Webinars List</h1>
-          <button className="bg-blue-600 text-white font-semibold !px-8 py-2 !rounded-full shadow-xl hover:bg-blue-700">
+          <h1 className="text-2xl font-bold text-gray-800">Webinars List</h1>
+          <button className="bg-blue-600 text-white font-semibold px-8 py-2 !rounded-full shadow-xl hover:bg-blue-700 mt-2 sm:mt-0">
             + Add
           </button>
         </div>
@@ -95,7 +95,7 @@ const Webinar = () => {
           <input
             type="text"
             placeholder="Search By Title, Date"
-            className="w-full sm:max-w-md ml-112 px-4 py-2 border border-gray-300 rounded"
+            className="w-full sm:max-w-md ml-auto px-4 py-2 border border-gray-300 rounded"
           />
         </div>
 
@@ -106,7 +106,7 @@ const Webinar = () => {
             return (
               <div
                 key={webinar.id}
-                className={`relative border border-gray-300 rounded-lg h-60 p-7 bg-white transition ${isExpired ? "opacity-50 pointer-events-none select-none" : ""
+                className={`relative border border-gray-300 rounded-lg min-h-[250px] p-4 sm:p-6 bg-white transition ${isExpired ? "opacity-50 pointer-events-none select-none" : ""
                   }`}
               >
                 {isExpired && (
@@ -115,43 +115,49 @@ const Webinar = () => {
                   </div>
                 )}
 
-                <div className="flex flex-col md:flex-row gap-4">
-                  <img
-                    src={webinar.imageUrl || noImg}
-                    alt="Webinar"
-                    className="w-full md:w-42 h-42 object-cover rounded"
-                  />
+                <div className="flex flex-col md:flex-row gap-4 h-full">
+                  <div className="w-full md:w-40 flex-shrink-0">
+                    <img
+                      src={webinar.imageUrl || noImg}
+                      alt="Webinar"
+                      className="w-full h-40 object-cover rounded"
+                    />
+                  </div>
 
-                  <div className="flex-1">
-                    <h2 className="text-xl font-semibold text-gray-800">
-                      {webinar.title}
-                    </h2>
+                  <div className="flex-1 flex flex-col justify-between">
+                    <div>
+                      <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1">
+                        {webinar.title}
+                      </h2>
 
-                    <p className="text-sm text-[#DA7821] font-medium mb-2">
-                      <ion-icon name="calendar-outline"></ion-icon> {webinar.date} - {webinar.endTime}
-                    </p>
+                      <p className="text-sm text-[#DA7821] font-medium mb-3">
+                        <ion-icon name="calendar-outline" className="mr-1"></ion-icon>
+                        {webinar.date} - {webinar.endTime}
+                      </p>
 
-                    {webinar.status === "upcoming" && timer && (
-                      <div className="grid grid-cols-4 gap-2 text-center mb-2">
-                        {Object.entries(timer).map(([label, value]) => (
-                          <div
-                            key={label}
-                            className="bg-[#e2e8f0] rounded p-1 text-xs"
-                          >
-                            <p className="font-semibold text-black text-sm">
-                              {value}
-                            </p>
-                            <p className="text-gray-500 capitalize">{label}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                      {webinar.status === "upcoming" && timer && (
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center mb-4">
+                          {Object.entries(timer).map(([label, value]) => (
+                            <div
+                              key={label}
+                              className="bg-[#e2e8f0] rounded p-1 text-xs"
+                            >
+                              <p className="font-semibold text-black text-sm">
+                                {value}
+                              </p>
+                              <p className="text-gray-500 capitalize">{label}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
 
                     <button
-                      className={`mt-2 ml-20 w-full md:w-50 text-center px-2 py-2 !rounded-3xl text-sm font-medium ${isExpired
+                      className={`w-full md:w-48 mt-3 px-4 py-2 rounded-3xl text-sm font-medium ${
+                        isExpired
                           ? "bg-gray-200 text-gray-600 cursor-not-allowed"
                           : "bg-blue-600 text-white hover:bg-blue-700"
-                        }`}
+                      }`}
                     >
                       Join The Webinar
                     </button>

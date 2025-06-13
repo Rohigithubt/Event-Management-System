@@ -23,6 +23,8 @@ import AboutUs from '../homepage/AboutUs'
 import LoginHome from '../homepage/home-auth/LoginHome'
 import SignupHome from '../homepage/home-auth/SignupHome'
 import News from '../components/admin/News'
+import ContactFormList from '../components/admin/ContactFormList'
+import UserList from '../components/admin/UserList'
 
 
 const Routers = () => {
@@ -67,6 +69,8 @@ const Routers = () => {
         <Route path="/dashboard" element={<Home><Dashboard /></Home>} />
         <Route path="/webinar" element={<Home><Webinar /></Home>} />
           <Route path="/news" element={<Home><News /></Home>} />
+          <Route path="/contact-form-list" element={<Home><ContactFormList /></Home>} />
+          <Route path="/user-list" element={<Home><UserList /></Home>} />
         <Route path='/footer' element={<Footer />} />
         <Route path='/event-list' element={<Home><EventList /></Home>} />
         <Route path='/volunteer-list' element={<Home><VolunteerList /></Home>} />

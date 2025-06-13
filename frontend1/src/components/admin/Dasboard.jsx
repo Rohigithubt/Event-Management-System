@@ -21,11 +21,9 @@ const Dashboard = () => {
 
   return (
     <div className="p-4 sm:p-6 space-y-6 max-w-screen-2xl mx-auto">
-      {/* Overview Cards Section */}
       <div className="border border-gray-100 rounded-lg p-4 sm:p-6">
         <h2 className="text-2xl sm:text-3xl font-bold mb-6">Overview</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {/* Registered Users Card */}
           <div className="bg-[#FCF6E4] shadow rounded-xl p-4 flex items-center space-x-4">
             <div className="bg-white rounded-lg p-3">
               <div className="overview-icon-box">
@@ -43,7 +41,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Active Users Card */}
           <div className="bg-[#EEEFFF] shadow rounded-xl p-4 flex items-center space-x-4">
             <div className="bg-white rounded-lg p-3">
               <div className="overview-icon-box">
@@ -63,7 +60,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* VIP Members Card */}
           <div className="bg-[#FFEEEF] shadow rounded-xl p-4 flex items-center space-x-4">
             <div className="bg-white rounded-lg p-3">
               <div className="overview-icon-box">
@@ -82,7 +78,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Seminar Tickets Card */}
           <div className="bg-[#E6FAFE] shadow rounded-xl p-4 flex items-center space-x-4">
             <div className="bg-white rounded-lg p-3">
               <div className="overview-icon-box">
@@ -101,9 +96,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Webinars and Seminars Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Upcoming Webinars */}
         <div className="bg-white shadow rounded-xl p-6">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-semibold">Upcoming Webinars</h3>
@@ -119,7 +112,6 @@ const Dashboard = () => {
           </ul>
         </div>
 
-        {/* Upcoming Seminars */}
         <div className="bg-white shadow rounded-xl p-6">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-semibold">Upcoming Seminars</h3>
