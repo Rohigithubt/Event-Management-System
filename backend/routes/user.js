@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const AdminApiController = require('../controllers/AdminApiController');
+const UserApiController = require('../controllers/UserApiController');
 
-router.post('/register',AdminApiController.register);
+router.post('/register',UserApiController.register);
+router.post('/login',UserApiController.login);
 // router.post('/',AdminApiController.);
 // router.post('/',AdminApiController.register);
 // router.post('/',AdminApiController.register);

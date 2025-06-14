@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { RegisterUser } from "../redux/user/userSlice" 
 
 const SignUp = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Signup:', form);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const resultAction = await dispatch(RegisterUser(form));
+    if (RegisterUser.fulfilled.match(resultAction)) {
+      navigate('/login');
+    } else {
+      console.error('Signup Failed:', resultAction.payload);
+    }
+  } catch (error) {
+    console.error('Error during signup:', error);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -55,9 +69,10 @@ const SignUp = () => {
                 className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <button style={{ background: '#006AF2' }}
+            <button
               type="submit"
               className="w-full bg-blue-600 text-white font-bold py-2 mt-7 m-4 ml-0 rounded hover:bg-blue-700 transition"
+              style={{ background: '#006AF2' }}
             >
               Register
             </button>

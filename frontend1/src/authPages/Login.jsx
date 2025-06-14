@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { LoginUser } from '../redux/user/userSlice'; 
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login:', form);
+    try {
+      const resultAction = await dispatch(LoginUser(form));
+      if (LoginUser.fulfilled.match(resultAction)) {
+        navigate('/'); 
+      } else {
+        console.error('Login failed:', resultAction.payload);
+      }
+    } catch (err) {
+      console.error('Error during login:', err);
+    }
   };
 
   return (
@@ -44,15 +57,15 @@ const Login = () => {
                 className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <button style={{ background: '#006AF2' }}
+            <button
               type="submit"
-              className="w-full text-white font-bold py-2 mt-7 m-4 ml-0"
+              style={{ background: '#006AF2' }}
+              className="w-full text-white font-bold py-2 mt-7 m-4 ml-0 rounded hover:bg-blue-700 transition"
             >
               Login
             </button>
-
-
           </form>
+
           <p className="text-sm text-center mt-4">
             Don't have an account?{' '}
             <Link to="/signup" className="text-blue-600 hover:underline">
