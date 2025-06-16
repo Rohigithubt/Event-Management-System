@@ -7,20 +7,37 @@ const global = require('../helper/GlobalHelper');
 module.exports ={
     // index,
     // login,
+    index,
     register,
     login,
     
 };
 
 async function register(req, res) {
-  const { name, email, password } = req.body;
-  console.log(req.body);
+  const { name, email, password, phoneno, role, location, type } = req.body;
 
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   try {
-    const user = await User.findOne({ email });
-    if (user) {
+    if (!name || !email || !password) {
+      return res.status(400).json({ status: false, message: "Name, email, and password are required." });
+    }
+
+    if (type === "full" || role === "volunteer") {
+      if (!phoneno || !role) {
+        return res.status(400).json({ status: false, message: "Phone number and role are required." });
+      }
+
+      if (role === "volunteer" && !location) {
+        return res.status(400).json({ status: false, message: "Location is required for volunteers." });
+      }
+    }
+    if(phoneno.length!==10){
+      return res.status(400).json({status:false,message: "Invalid phone number. Must be a 10 digits number."});
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
       return res.status(401).json({ status: false, message: "Email is already in use" });
     }
 
@@ -32,13 +49,27 @@ async function register(req, res) {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    req.body.password = hashedPassword;
+    req.body.password = await bcrypt.hash(password, 10);
     await User.create(req.body);
 
-    res.status(200).json({ status: true, message: "User created successfully!" });
-  } catch (error) {
-    console.log("Registration failed:", error);
+    return res.status(200).json({ status: true, message: "User registered successfully." });
+  } catch (err) {
+    console.log("Registration Error:", err);
+    return res.status(500).json({ status: false, message: "Internal server error" });
+  }
+}
+
+
+async function index(req,res){
+  try{
+    const users = await User.find({ isDeleted: false});
+    if(!users || users.length == 0){
+      return res.status(404).json({status:false, message:"No user found"});
+    }
+    res.status(200).json({status:true , data:users});
+  }
+  catch (error) {
+    console.log('User fetch failed:', error);
     res.status(500).send("Internal server error");
   }
 }

@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import noImg from '../../assets/images/no-image.jpg';
 import Footer from '../../components/admin/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { LoginUser } from '../../redux/user/userSlice';
 
 const LoginHome = () => {
   const [form, setForm] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const news = [
     {
@@ -31,6 +37,21 @@ const LoginHome = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await dispatch(LoginUser(form));
+    if (LoginUser.fulfilled.match(result)) {
+      navigate('/');
+    } else if (LoginUser.rejected.match(result)) {
+      if (result.payload && typeof result.payload === 'object') {
+        setErrors(result.payload);
+      } else {
+        setErrors({ general: 'Login failed. Please try again.' });
+      }
+    }
   };
 
   return (
@@ -46,15 +67,20 @@ const LoginHome = () => {
             </p>
           </div>
 
-          <div className="w-full max-w-xl bg-white p-10 rounded-xl shadow-lg border border-gray-200 space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-xl bg-white p-10 rounded-xl shadow-lg border border-gray-200 space-y-6"
+          >
             <div className="flex justify-center mb-6">
               <div className="flex items-center bg-[#f5f7f9] rounded-full p-1 gap-1">
-                <Link to="/login-home"
+                <Link
+                  to="/login-home"
                   className="text-sm px-6 py-2 rounded-full font-semibold bg-blue-600 text-white shadow-md duration-300"
                 >
                   Login
                 </Link>
-                <Link to="/signup-home"
+                <Link
+                  to="/signup-home"
                   className="text-sm px-6 py-2 rounded-full font-semibold text-[#0a2540] hover:text-white duration-300"
                 >
                   Sign Up
@@ -72,6 +98,9 @@ const LoginHome = () => {
                 placeholder="Enter Your Email"
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
 
             <div>
@@ -93,6 +122,9 @@ const LoginHome = () => {
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
               </div>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+              )}
             </div>
 
             <div className="flex items-center justify-between">
@@ -109,10 +141,17 @@ const LoginHome = () => {
               <button className="text-sm text-blue-600 hover:underline">Forgot Password?</button>
             </div>
 
-            <button className="w-full bg-blue-600 text-white font-bold py-3 rounded-full shadow-md hover:bg-blue-700 transition">
+            {errors.general && (
+              <p className="text-red-500 text-sm text-center">{errors.general}</p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white font-bold py-3 rounded-full shadow-md hover:bg-blue-700 transition"
+            >
               Login
             </button>
-          </div>
+          </form>
         </div>
 
         <div className="w-full md:w-1/2 px-6 py-10 bg-[#f9fafb] overflow-y-auto">
@@ -145,7 +184,6 @@ const LoginHome = () => {
               </div>
             ))}
           </div>
-
         </div>
       </div>
 
