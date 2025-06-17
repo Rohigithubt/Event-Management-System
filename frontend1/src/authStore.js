@@ -30,3 +30,39 @@ export const login = async ({email, password}) => {
   });
   return response.data;
 };
+
+export const editprofile = async ({userId}) =>{
+
+  const response = await axios.post(`${API_URL}/api/editprofile`,{userId},{
+   
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials:true
+  });
+  //  console.log(response,"response");
+  return response.data;
+}
+
+export const updateprofile = async (profileData) => {
+  const token = localStorage.getItem('token'); // Get token from storage
+  const response = await axios.post(`${API_URL}/api/updateprofile`, profileData, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` 
+    },
+    withCredentials: true
+  });
+  return response.data;
+}
+
+export const destroy = async(userId) =>{
+  const response = await axios.post(`${API_URL}/api/destroy`,{userId},{
+    
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials:true
+  });
+  return response.data;
+}

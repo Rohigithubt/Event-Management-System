@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { register, login, index } from "../../authStore";
+import { register, login, index, editprofile, updateprofile, destroy } from "../../authStore";
+// import { updateprofile } from "../../../../backend/controllers/UserApiController";
 
 const initialState = {
   message: "",
@@ -40,6 +41,48 @@ export const LoginUser = createAsyncThunk("login", async (loginData, { rejectWit
     return rejectWithValue(message);
   }
 });
+
+export const EditUserProfile = createAsyncThunk("editprofile",async (userId, {rejectWithValue}) =>{
+    try{
+      const response = await editprofile({userId});
+      return response;
+    }
+    catch(error){
+      const message = error.response?.data?.message || "Editprofile Failed";
+      return rejectWithValue(message);
+    }
+});
+
+export const UpdateUserProfile = createAsyncThunk(
+  "updateprofile",
+  async (profileData, { rejectWithValue }) => {
+    try {
+      const response = await updateprofile(profileData);
+       console.log(response,"profileData")
+      return response;
+    } catch (error) {
+      const message = error.response?.data?.message || "Update Profile Failed";
+      return rejectWithValue(message);
+    }
+  }
+);
+
+export const DestroyUserData = createAsyncThunk(
+  "destroy",
+  async (userId,{rejectWithValue}) =>{
+    try{
+      const response = await destroy(userId);
+      return response;
+    }
+    catch(error){
+    const message = error.response?.data?.message || "Error deleteing user";
+      return rejectWithValue(message);
+  }
+  }
+  
+
+
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -103,8 +146,33 @@ const userSlice = createSlice({
     .addCase(Index.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    });
+    })
 
+    .addCase(EditUserProfile.pending,(state)=>{
+      state.loading = true;
+    })
+     .addCase(EditUserProfile.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload.data;
+      state.error = null;
+    })
+    .addCase(EditUserProfile.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+
+     .addCase(UpdateUserProfile.pending,(state)=>{
+      state.loading = true;
+    })
+     .addCase(UpdateUserProfile.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload.data;
+      state.error = null;
+    })
+    .addCase(UpdateUserProfile.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
 
   },
 });
