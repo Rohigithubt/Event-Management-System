@@ -158,6 +158,7 @@ async function updateprofile(req, res) {
 async function destroy(req,res) {
   try{
       let {userId} = req.body;
+      console.log(req.body)
       let result= await User.findByIdAndDelete(userId);
       res.status(200).json({status:true,message: "user deleted successfully"});
   }

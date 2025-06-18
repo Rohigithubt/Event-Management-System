@@ -6,7 +6,8 @@ import {
   FiMonitor,
   FiBookOpen,
   FiPhone,
-  FiLogOut
+  FiLogOut,
+  FiMapPin 
 } from 'react-icons/fi';
 import { MdEventNote, MdNewspaper } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
@@ -123,6 +124,20 @@ const Sidebar = ({ isOpen }) => {
           </NavLink>
         </li>
 
+        <li>
+          <NavLink
+            to="/location-list"
+            className={({ isActive }) =>
+              `flex items-center gap-4 py-3 px-5 h-17 rounded-full duration-200 ${isActive
+                ? 'bg-[#006AF2] text-white'
+                : 'bg-[#F5F7F9] text-black hover:bg-[#006AF2] hover:!text-white'
+              }`
+            }
+          >
+            <FiMapPin className="text-xl" />
+            <span className="text-md">Location List</span>
+          </NavLink>
+        </li>
         <li>
           <NavLink
             to="/event-list"

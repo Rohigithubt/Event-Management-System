@@ -4,7 +4,7 @@ import noImg from '../../assets/images/no-image.jpg';
 import Footer from '../../components/admin/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { RegisterUser } from '../../redux/user/userSlice';
+import { RegisterUser } from '../../redux/slice/userSlice';
 
 const SignupHome = () => {
   const [form, setForm] = useState({

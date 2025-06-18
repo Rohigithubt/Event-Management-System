@@ -5,7 +5,8 @@ import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Index, DestroyUserData } from "../../redux/user/userSlice";
+// import { Index, DestroyUserData } from "../../redux/slice/userSlice";
+import { Index,DestroyUserData } from "../../redux/slice/userSlice";
 
 const UserList = () => {
   const dispatch = useDispatch();

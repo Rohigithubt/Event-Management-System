@@ -10,7 +10,7 @@ import {
   UpdateUserProfile,
   RegisterUser,
   DestroyUserData,
-} from "../../redux/user/userSlice";
+} from "../../redux/slice/userSlice";
 
 const VolunteerList = () => {
   const dispatch = useDispatch();
@@ -96,7 +96,6 @@ const VolunteerList = () => {
 
   const handleAddVolunteer = async () => {
     try {
-      // Basic validation
       if (newVolunteer.password !== newVolunteer.confirmPassword) {
         toast.error("Passwords do not match");
         return;

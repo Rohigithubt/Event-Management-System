@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { register, login, index, editprofile, updateprofile, destroy } from "../../authStore";
-// import { updateprofile } from "../../../../backend/controllers/UserApiController";
 
 const initialState = {
   message: "",
@@ -78,11 +77,8 @@ export const DestroyUserData = createAsyncThunk(
     const message = error.response?.data?.message || "Error deleteing user";
       return rejectWithValue(message);
   }
-  }
+  });
   
-
-
-);
 
 const userSlice = createSlice({
   name: "user",
@@ -173,6 +169,20 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     })
+
+    .addCase(DestroyUserData.pending, (state) => {
+  state.loading = true;
+})
+.addCase(DestroyUserData.fulfilled, (state, action) => {
+  state.loading = false;
+  state.success = true;
+  state.message = action.payload.message;
+})
+.addCase(DestroyUserData.rejected, (state, action) => {
+  state.loading = false;
+  state.error = action.payload;
+})
+
 
   },
 });

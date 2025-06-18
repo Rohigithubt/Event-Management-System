@@ -25,6 +25,7 @@ import SignupHome from '../homepage/home-auth/SignupHome'
 import News from '../components/admin/News'
 import ContactFormList from '../components/admin/ContactFormList'
 import UserList from '../components/admin/UserList'
+import LocationList from '../components/admin/LocationList'
 
 
 const Routers = () => {
@@ -76,6 +77,7 @@ const Routers = () => {
         <Route path='/volunteer-list' element={<Home><VolunteerList /></Home>} />
         <Route path='/Seminar-list' element={<Home><Seminar /></Home>} />
         <Route path='/profile-details' element={<Home><ProfileDetails /></Home>} />
+           <Route path='/location-list' element={<Home><LocationList /></Home>} />
 
 
         <Route path="*" element={<Notfound />} />

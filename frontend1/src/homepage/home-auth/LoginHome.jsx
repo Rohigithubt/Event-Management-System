@@ -4,7 +4,7 @@ import noImg from '../../assets/images/no-image.jpg';
 import Footer from '../../components/admin/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { LoginUser } from '../../redux/user/userSlice';
+import { LoginUser } from '../../redux/slice/userSlice';
 
 const LoginHome = () => {
   const [form, setForm] = useState({ email: '', password: '' });
