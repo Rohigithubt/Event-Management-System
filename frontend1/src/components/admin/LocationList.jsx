@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 const LocationList = () => {
     const dispatch = useDispatch();
     const { location, loading, error } = useSelector((state) => state.location);
+    console.log(location,"location")
 
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
@@ -150,12 +151,7 @@ const LocationList = () => {
                 <div className="border border-gray-300 p-5 rounded-lg">
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-2xl font-bold text-gray-800">Add New Location</h1>
-                        <button
-                            onClick={() => setShowAddForm(false)}
-                            className="bg-gray-200 text-black px-4 py-2 rounded"
-                        >
-                            Back to List
-                        </button>
+                       
                     </div>
 
                     <div className="space-y-4">
@@ -242,29 +238,22 @@ const LocationList = () => {
                 <div className="border border-gray-300 p-5 rounded-lg">
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-2xl font-bold text-gray-800">View Location</h1>
-                        <button
-                            onClick={() => setSelectedLocation(null)}
-                            className="bg-gray-200 text-black px-4 py-2 rounded"
-                        >
-                            Back to List
-                        </button>
+                       
                     </div>
 
                     <div className="space-y-4">
+                          
                         <div>
-                            <p className="font-semibold">Location Name:</p>
-                            <p className="text-gray-700">{selectedLocation.locationName}</p>
+                            <p className="font-bold text-xl !mt-10 mb-8">Location Name: <span className="ml-2 font-normal">{selectedLocation.locationName}</span></p>
+                            <p className="text-gray-700"></p>
                         </div>
-                        <div>
-                            <p className="font-semibold">Created At:</p>
-                            <p className="text-gray-700">{selectedLocation.createdAt}</p>
-                        </div>
-                        <div>
-                            <p className="font-semibold">Status:</p>
-                            <p className={selectedLocation.isDeleted ? "text-red-500" : "text-green-500"}>
-                                {selectedLocation.isDeleted ? "Deleted" : "Active"}
-                            </p>
-                        </div>
+
+                        <button
+                            onClick={() => setSelectedLocation(null)}
+                            className="bg-gray-200 text-black px-4 py-2 hover:bg-[#0A2540] hover:text-white !rounded-full"
+                        >
+                            Back
+                        </button>
                     </div>
                 </div>
             );
@@ -347,13 +336,13 @@ const LocationList = () => {
                                                 <ion-icon name="eye-outline"></ion-icon>
                                             </button>
                                             <button
-                                                className="bg-white text-black px-2 py-0 rounded-md text-xs hover:bg-yellow-400 hover:text-white"
+                                                className="bg-white text-black px-2 py-0 rounded-md text-xs hover:bg-[#006AF2] hover:text-white"
                                                 onClick={() => handleEditClick(location._id)}
                                             >
                                                 <ion-icon name="create-outline"></ion-icon>
                                             </button>
                                             <button
-                                                className="bg-white text-black px-2 py-0 rounded-md text-xs hover:bg-red-500 hover:text-white"
+                                                className="bg-white text-black px-2 py-0 rounded-md text-xs hover:bg-[#006AF2] hover:text-white"
                                                 onClick={() => handleDelete(location._id)}
                                             >
                                                 <ion-icon name="trash-outline"></ion-icon>

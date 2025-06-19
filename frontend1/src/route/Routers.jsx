@@ -22,7 +22,7 @@ import Notfound from '../Notfound'
 import AboutUs from '../homepage/AboutUs'
 import LoginHome from '../homepage/home-auth/LoginHome'
 import SignupHome from '../homepage/home-auth/SignupHome'
-import News from '../components/admin/News'
+import NewsList from '../components/admin/News'
 import ContactFormList from '../components/admin/ContactFormList'
 import UserList from '../components/admin/UserList'
 import LocationList from '../components/admin/LocationList'
@@ -69,7 +69,7 @@ const Routers = () => {
         <Route path='/' element={<Home />} />
         <Route path="/dashboard" element={<Home><Dashboard /></Home>} />
         <Route path="/webinar" element={<Home><Webinar /></Home>} />
-          <Route path="/news" element={<Home><News /></Home>} />
+          <Route path="/news" element={<Home><NewsList /></Home>} />
           <Route path="/contact-form-list" element={<Home><ContactFormList /></Home>} />
           <Route path="/user-list" element={<Home><UserList /></Home>} />
         <Route path='/footer' element={<Footer />} />

@@ -124,3 +124,58 @@ export const updatelocation = async (locationId) => {
   })
   return response.data;
 }
+
+
+/*------------------------------------------------News authstore-------------------------------------------------------------------------- */
+
+export const createnews = async(createData) =>{
+  const response = await axios.post(`${API_URL}/api/create-news`,createData,{
+     headers: {
+     'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true
+  })
+  console.log(response.data,"response.data")
+  return response.data;
+}
+
+export const indexnews = async(newsId) =>{
+  const response = await axios.post(`${API_URL}/api/index-news`,newsId,{
+     headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  })
+  console.log(response.data,"ddd")
+  return response.data;
+}
+
+export const editnews = async(newsId) =>{
+  const response = await axios.post(`${API_URL}/api/edit-news`,newsId,{
+    headers: {
+     'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true
+  })
+  return response.data;
+}
+
+export const updatenews = async(newsId) =>{
+  const response = await axios.post(`${API_URL}/api/update-news`,newsId, {
+     headers: {
+     'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true
+  })
+  return response.data;
+}
+
+export const deletenews = async(newsId) =>{
+  const response = await axios.post(`${API_URL}/api/delete-news`,newsId, {
+     headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  })
+  return response.data;
+}

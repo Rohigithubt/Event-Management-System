@@ -64,7 +64,7 @@ async function editlocation(req,res) {
     try{
        const location = await Location.findById(locationId);
        if(!location){
-        return res.status(401).json({status:false,message:"Location not found"});   
+        return res.status(404).json({status:false,message:"Location not found"});   
        }
        return res.status(200).json({status:true, data:location});
     }
