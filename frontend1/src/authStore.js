@@ -146,32 +146,147 @@ export const indexnews = async(newsId) =>{
     },
     withCredentials: true
   })
-  console.log(response.data,"ddd")
+  // console.log(response.data,"ddd")
   return response.data;
 }
 
 export const editnews = async(newsId) =>{
-  const response = await axios.post(`${API_URL}/api/edit-news`,newsId,{
+  const response = await axios.post(`${API_URL}/api/edit-news`,{newsId},{
     headers: {
-     'Content-Type': 'multipart/form-data'
+     'Content-Type': 'application/json'
     },
     withCredentials: true
   })
+  console.log(response.data,"eeee")
   return response.data;
 }
 
-export const updatenews = async(newsId) =>{
-  const response = await axios.post(`${API_URL}/api/update-news`,newsId, {
+export const updatenews = async(newsId,updateData) =>{
+  const response = await axios.post(`${API_URL}/api/update-news`, {newsId,updateData} , {
      headers: {
      'Content-Type': 'multipart/form-data'
     },
     withCredentials: true
   })
+  console.log(response,"response")
   return response.data;
 }
 
 export const deletenews = async(newsId) =>{
-  const response = await axios.post(`${API_URL}/api/delete-news`,newsId, {
+  const response = await axios.post(`${API_URL}/api/delete-news`,{newsId}, {
+     headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  })
+  return response.data;
+}
+
+//---------------------------------------------Seminar authstore-------------------------------------------------------------------l
+
+
+export const createseminar = async(createData) =>{
+  const response = await axios.post(`${API_URL}/api/create-seminar`,createData,{
+     headers: {
+     'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true
+  })
+  console.log(response.data,"response.data")
+  return response.data;
+}
+
+export const indexseminar = async(seminarId) =>{
+  const response = await axios.post(`${API_URL}/api/index-seminar`,seminarId,{
+     headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  })
+  // console.log(response.data,"ddd")
+  return response.data;
+}
+
+export const editseminar = async(seminarId) =>{
+  const response = await axios.post(`${API_URL}/api/edit-seminar`,{seminarId},{
+    headers: {
+     'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  })
+  console.log(response.data,"eeee")
+  return response.data;
+}
+
+export const updateseminar = async(formData) =>{
+  const response = await axios.post(`${API_URL}/api/update-seminar`, formData , {
+     headers: {
+     'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true
+  })
+  console.log(response,"response")
+  return response.data;
+}
+
+export const deleteseminar = async(seminarId) =>{
+  const response = await axios.post(`${API_URL}/api/delete-seminar`,{seminarId}, {
+     headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  })
+  return response.data;
+}
+
+//----------------------------------------------Webinar authstore-------------------------------------------------------------------
+
+export const createwebinar = async(createData) =>{
+  const response = await axios.post(`${API_URL}/api/create-webinar`,createData,{
+     headers: {
+     'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true
+  })
+  console.log(response.data,"response.data")
+  return response.data;
+}
+
+export const indexwebinar = async(webinarId) =>{
+  const response = await axios.post(`${API_URL}/api/index-seminar`,webinarId,{
+     headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  })
+  // console.log(response.data,"ddd")
+  return response.data;
+}
+
+export const editwebinar = async(webinarId) =>{
+  const response = await axios.post(`${API_URL}/api/edit-seminar`,{webinarId},{
+    headers: {
+     'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  })
+  console.log(response.data,"eeee")
+  return response.data;
+}
+
+export const updatewebinar = async(formData) =>{
+  const response = await axios.post(`${API_URL}/api/update-webinar`, formData , {
+     headers: {
+     'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true
+  })
+  console.log(response,"response")
+  return response.data;
+}
+
+export const deletewebinar = async(webinarId) =>{
+  const response = await axios.post(`${API_URL}/api/delete-webinar`,{webinarId}, {
      headers: {
       'Content-Type': 'application/json'
     },

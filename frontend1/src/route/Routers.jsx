@@ -6,7 +6,7 @@ import Webinar from '../components/admin/Webinar'
 import Footer from '../components/admin/Footer'
 import EventList from '../components/admin/EventList'
 import VolunteerList from '../components/admin/VolunteerList'
-import Seminar from '../components/admin/Seminar'
+import SeminarList from '../components/admin/SeminarList'
 import ProfileDetails from '../components/admin/ProfileDetails'
 import Login from '../authPages/Login'
 import SignUp from '../authPages/SignUp'
@@ -22,7 +22,7 @@ import Notfound from '../Notfound'
 import AboutUs from '../homepage/AboutUs'
 import LoginHome from '../homepage/home-auth/LoginHome'
 import SignupHome from '../homepage/home-auth/SignupHome'
-import NewsList from '../components/admin/News'
+import NewsList from '../components/admin/NewsList'
 import ContactFormList from '../components/admin/ContactFormList'
 import UserList from '../components/admin/UserList'
 import LocationList from '../components/admin/LocationList'
@@ -75,7 +75,7 @@ const Routers = () => {
         <Route path='/footer' element={<Footer />} />
         <Route path='/event-list' element={<Home><EventList /></Home>} />
         <Route path='/volunteer-list' element={<Home><VolunteerList /></Home>} />
-        <Route path='/Seminar-list' element={<Home><Seminar /></Home>} />
+        <Route path='/Seminar-list' element={<Home><SeminarList /></Home>} />
         <Route path='/profile-details' element={<Home><ProfileDetails /></Home>} />
            <Route path='/location-list' element={<Home><LocationList /></Home>} />
 

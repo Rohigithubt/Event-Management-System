@@ -1,20 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createnews, deletenews, editnews, indexnews, updatenews } from "../../authStore";
+import { createwebinar, deletewebinar, editwebinar, indexwebinar, updatewebinar } from "../../authStore";
 
 
 const initialState = {
     message: "",
-    news: [],
+    webinar: [],
     loading: false,
     error: null,
     success: false,
 };
 
-export const CreateNews = createAsyncThunk(
-    "create-news",
+export const Createwebinar = createAsyncThunk(
+    "create-webinar",
     async (createData, { rejectWithValue }) => {
         try {
-            const response = await createnews(createData);
+            const response = await createwebinar(createData);
             console.log(response, "response")
             return response;
         }
@@ -25,11 +25,11 @@ export const CreateNews = createAsyncThunk(
     }
 );
 
-export const IndexNews = createAsyncThunk(
-    "index-news",
+export const IndexWebinar = createAsyncThunk(
+    "index-webinar",
     async (_id, { rejectWithValue }) => {
         try {
-            const response = await indexnews(_id);
+            const response = await indexwebinar(_id);
             // console.log(response, "rrrrrrr")
             return response;
         }
@@ -40,11 +40,11 @@ export const IndexNews = createAsyncThunk(
     }
 );
 
-export const EditNews = createAsyncThunk(
-    "edit-news",
-    async (newsId, { rejectWithValue }) => {
+export const EditWebinar = createAsyncThunk(
+    "edit-webinar",
+    async (webinarId, { rejectWithValue }) => {
         try {
-            const response = await editnews(newsId);
+            const response = await editwebinar(webinarId);
             console.log(response,"hhhh")
             return response;
         }
@@ -55,11 +55,11 @@ export const EditNews = createAsyncThunk(
     }
 );
 
-export const UpdateNews = createAsyncThunk(
-    "update-news",
-    async ({ newsId, formData }, { rejectWithValue }) => {
+export const UpdateWebinar = createAsyncThunk(
+    "update-webinar",
+    async ({ webinarId, formData }, { rejectWithValue }) => {
         try {
-            const response = await updatenews(newsId,formData);
+            const response = await updatewebinar(webinarId,formData);
             console.log(response,"response")
             return response;
         }
@@ -70,11 +70,11 @@ export const UpdateNews = createAsyncThunk(
     }
 )
 
-export const DeleteNews = createAsyncThunk(
-    "delete-news",
-    async (newsId, { rejectWithValue }) => {
+export const DeleteWebinar = createAsyncThunk(
+    "delete-webinar",
+    async (webinarId, { rejectWithValue }) => {
         try {
-            const response = await deletenews(newsId);
+            const response = await deletewebinar(webinarId);
             return response;
         }
         catch (error) {
@@ -84,8 +84,8 @@ export const DeleteNews = createAsyncThunk(
     }
 )
 
-const newsSlice = createSlice({
-    name: 'news',
+const webinarSlice = createSlice({
+    name: 'webinar',
     initialState,
     reducers: {
         clearMessages: (state) => {
@@ -96,79 +96,79 @@ const newsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(CreateNews.pending, (state) => {
+            .addCase(Createwebinar.pending, (state) => {
                 state.loading = true;
                 state.error = null;
                 state.success = false;
             })
-            .addCase(CreateNews.fulfilled, (state, action) => {
+            .addCase(Createwebinar.fulfilled, (state, action) => {
                 state.loading = false;
                 state.success = true;
-                state.message = action.payload?.message || "News created successfully";
+                state.message = action.payload?.message || "Webinar created successfully";
                 if (action.payload?.data) {
-                    state.news.push(action.payload.data);
+                    state.webinar.push(action.payload.data);
                 }
             })
-            .addCase(CreateNews.rejected, (state, action) => {
+            .addCase(Createwebinar.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
 
-            .addCase(IndexNews.pending, (state) => {
+            .addCase(IndexWebinar.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(IndexNews.fulfilled, (state, action) => {
+            .addCase(IndexWebinar.fulfilled, (state, action) => {
                 state.loading = false;
-                state.news = action.payload?.data || action.payload || [];
-                state.message = action.payload?.message || "News fetched successfully";
+                state.webinar = action.payload?.data || action.payload || [];
+                state.message = action.payload?.message || "Webinar fetched successfully";
             })
-            .addCase(IndexNews.rejected, (state, action) => {
+            .addCase(IndexWebinar.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                state.news = [];
+                state.webinar = [];
             })
 
-            .addCase(EditNews.pending, (state) => {
+            .addCase(EditWebinar.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(EditNews.fulfilled, (state, action) => {
+            .addCase(EditWebinar.fulfilled, (state, action) => {
                 state.loading = false;
-                state.news = action.payload.data;
+                state.webinar = action.payload.data;
                 state.error = null;
             })
-            .addCase(EditNews.rejected, (state, action) => {
+            .addCase(EditWebinar.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
 
-            .addCase(UpdateNews.pending, (state) => {
+            .addCase(UpdateWebinar.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(UpdateNews.fulfilled, (state, action) => {
+            .addCase(UpdateWebinar.fulfilled, (state, action) => {
                 state.loading = false;
-                state.news = action.payload.data;
+                state.webinar = action.payload.data;
                 state.error = null;
             })
-            .addCase(UpdateNews.rejected, (state, action) => {
+            .addCase(UpdateWebinar.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
 
-            .addCase(DeleteNews.pending, (state) => {
+            .addCase(DeleteWebinar.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(DeleteNews.fulfilled, (state, action) => {
+            .addCase(DeleteWebinar.fulfilled, (state, action) => {
                 state.loading = false;
                 state.success = true;
                 state.message = action.payload.message;
             })
-            .addCase(DeleteNews.rejected, (state, action) => {
+            .addCase(DeleteWebinar.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
     }
 });
 
-export const { clearMessages } = newsSlice.actions;
-export default newsSlice.reducer;
+export const { clearMessages } = webinarSlice.actions;
+export default webinarSlice.reducer;

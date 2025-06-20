@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const NewsList = () => {
   const dispatch = useDispatch();
-  const { news, loading, error } = useSelector((state) => state.news);
+  const { news = [], loading, error } = useSelector((state) => state.news);
 
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,13 +18,16 @@ const NewsList = () => {
   const [showViewForm, setShowViewForm] = useState(false);
   const [selectedNews, setSelectedNews] = useState(null);
   const [editNewsData, setEditNewsData] = useState(null);
-  const [newNews, setNewNews] = useState({
+  
+  const initialNewsState = {
     title: "",
     content: "",
     date: new Date().toISOString().split('T')[0],
     image: null,
     imagePreview: null
-  });
+  };
+  
+  const [newNews, setNewNews] = useState(initialNewsState);
 
   const fileInputRef = useRef();
 
@@ -36,9 +39,11 @@ const NewsList = () => {
     if (error) toast.error(error);
   }, [error]);
 
-  const filteredNews = news.filter((item) =>
-    item.title?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredNews = Array.isArray(news) 
+    ? news.filter((item) =>
+        item?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
   const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -53,7 +58,7 @@ const NewsList = () => {
       const formData = new FormData();
       formData.append('title', newNews.title);
       formData.append('content', newNews.content);
-      formData.append('date', newNews.date);
+      formData.append('created_at', newNews.date);
       if (newNews.image) {
         formData.append('image', newNews.image);
       }
@@ -63,13 +68,7 @@ const NewsList = () => {
       if (res.payload?.success || res?.meta?.requestStatus === "fulfilled") {
         toast.success("News added successfully");
         setShowAddForm(false);
-        setNewNews({
-          title: "",
-          content: "",
-          date: new Date().toISOString().split('T')[0],
-          image: null,
-          imagePreview: null
-        });
+        setNewNews(initialNewsState);
         dispatch(IndexNews());
       } else {
         toast.error(res.payload?.message || "Failed to add news");
@@ -81,22 +80,27 @@ const NewsList = () => {
 
   const handleEditClick = async (newsId) => {
     try {
-      const res = await dispatch(EditNews({newsId}));
-      if (res.payload?.success) {
-        setEditNewsData(res.payload.data);
+      const res = await dispatch(EditNews(newsId));
+      
+      if (res.payload?.data) {
+        const newsData = res.payload.data;
+        setEditNewsData(newsData);
         setNewNews({
-          title: res.payload.data.title,
-          content: res.payload.data.content,
-          date: res.payload.data.created_at,
+          title: newsData.title || "",
+          content: newsData.content || "",
+          date: newsData.created_at ? newsData.created_at.split('T')[0] : new Date().toISOString().split('T')[0],
           image: null,
-          imagePreview: res.payload.data.image 
-            ? `${import.meta.env.VITE_API_URL}${res.payload.data.image}`
+          imagePreview: newsData.image 
+            ? `${import.meta.env.VITE_API_URL}${newsData.image}`
             : null
         });
         setShowAddForm(true);
+      } else {
+        toast.error("Failed to fetch news data");
       }
     } catch (error) {
       toast.error("Failed to fetch news data");
+      console.error("Edit error:", error);
     }
   };
 
@@ -106,27 +110,22 @@ const NewsList = () => {
       const formData = new FormData();
       formData.append('title', newNews.title);
       formData.append('content', newNews.content);
-      formData.append('date', newNews.created_at);
+      formData.append('created_at', newNews.created_at);
       if (newNews.image) {
         formData.append('image', newNews.image);
       }
 
       const res = await dispatch(UpdateNews({
-        id: editNewsData.newsId,
+        id: editNewsData._id,
         data: formData
       }));
+      console.log(res,"resaaa")
 
       if (res.payload?.success || res?.meta?.requestStatus === "fulfilled") {
         toast.success("News updated successfully");
         setShowAddForm(false);
         setEditNewsData(null);
-        setNewNews({
-          title: "",
-          content: "",
-          date: new Date().toISOString().split('T')[0],
-          image: null,
-          imagePreview: null
-        });
+        setNewNews(initialNewsState);
         dispatch(IndexNews());
       } else {
         toast.error(res.payload?.message || "Failed to update news");
@@ -199,6 +198,12 @@ const NewsList = () => {
     fileInputRef.current.click();
   };
 
+  const resetForm = () => {
+    setNewNews(initialNewsState);
+    setEditNewsData(null);
+    setShowAddForm(false);
+  };
+
   const renderMainContent = () => {
     if (showAddForm) {
       return (
@@ -208,17 +213,7 @@ const NewsList = () => {
               {editNewsData ? "Edit News" : "Add New News"}
             </h1>
             <button
-              onClick={() => {
-                setShowAddForm(false);
-                setEditNewsData(null);
-                setNewNews({
-                  title: "",
-                  content: "",
-                  date: new Date().toISOString().split('T')[0],
-                  image: null,
-                  imagePreview: null
-                });
-              }}
+              onClick={resetForm}
               className="bg-gray-200 text-black px-4 py-2 rounded"
             >
               Back to List
@@ -254,8 +249,8 @@ const NewsList = () => {
               <input
                 type="date"
                 className="w-full px-4 py-2 border border-gray-300 rounded"
-                value={newNews.created_at}
-                onChange={(e) => setNewNews({ ...newNews, created_at: e.target.value })}
+                value={newNews.date}
+                onChange={(e) => setNewNews({ ...newNews, date: e.target.value })}
                 required
               />
             </div>
@@ -310,17 +305,7 @@ const NewsList = () => {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  setShowAddForm(false);
-                  setEditNewsData(null);
-                  setNewNews({
-                    title: "",
-                    content: "",
-                    date: new Date().toISOString().split('T')[0],
-                    image: null,
-                    imagePreview: null
-                  });
-                }}
+                onClick={resetForm}
                 className="bg-gray-200 text-black px-4 py-2 rounded"
               >
                 Cancel
@@ -379,13 +364,7 @@ const NewsList = () => {
             onClick={() => {
               setShowAddForm(true);
               setEditNewsData(null);
-              setNewNews({
-                title: "",
-                content: "",
-                date: new Date().toISOString().split('T')[0],
-                image: null,
-                imagePreview: null
-              });
+              setNewNews(initialNewsState);
             }}
             className="bg-[#006AF2] text-white !rounded-full px-6 py-2 shadow-xl w-full sm:w-auto"
           >

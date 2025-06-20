@@ -71,21 +71,20 @@ async function editnews(req,res) {
   }
 }
 
-async function updatenews(req,res) {
-  const {newsId} = req.body;
-  const updateData = {...req.body};
+async function updatenews(req, res) {
+  const { newsId, updateData } = req.body;
+  console.log(newsId, updateData);
 
-  try{
-      delete updateData.newsId;
-      const news = await News.findByIdAndUpdate(newsId,updateData,{new:true});
-      if(!news){
-        return res.status(404).json({status:false,message:"News not found"});
-      }
-      return res.status(200).json({status:true,news});
-  }
-  catch(error){
+  try {
+    delete updateData.newsId;
+    const news = await News.findByIdAndUpdate(newsId, updateData, { new: true });
+    if (!news) {
+      return res.status(404).json({ status: false, message: "News not found" });
+    }
+    return res.status(200).json({ status: true, news });
+  } catch (error) {
     console.log(error);
-    res.status(500).json({error:"News update failed"});
+    res.status(500).json({ error: "News update failed" });
   }
 }
 
