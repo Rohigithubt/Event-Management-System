@@ -241,56 +241,117 @@ export const deleteseminar = async(seminarId) =>{
 
 //----------------------------------------------Webinar authstore-------------------------------------------------------------------
 
-export const createwebinar = async(createData) =>{
-  const response = await axios.post(`${API_URL}/api/create-webinar`,createData,{
-     headers: {
-     'Content-Type': 'multipart/form-data'
-    },
-    withCredentials: true
-  })
-  console.log(response.data,"response.data")
-  return response.data;
-}
-
-export const indexwebinar = async(webinarId) =>{
-  const response = await axios.post(`${API_URL}/api/index-seminar`,webinarId,{
-     headers: {
-      'Content-Type': 'application/json'
-    },
-    withCredentials: true
-  })
-  // console.log(response.data,"ddd")
-  return response.data;
-}
-
-export const editwebinar = async(webinarId) =>{
-  const response = await axios.post(`${API_URL}/api/edit-seminar`,{webinarId},{
+export const createwebinar = async (createData) => {
+  const response = await axios.post(`${API_URL}/api/create-webinar`, createData, {
     headers: {
-     'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     },
     withCredentials: true
-  })
-  console.log(response.data,"eeee")
+  });
   return response.data;
-}
+};
 
-export const updatewebinar = async(formData) =>{
-  const response = await axios.post(`${API_URL}/api/update-webinar`, formData , {
-     headers: {
-     'Content-Type': 'multipart/form-data'
-    },
-    withCredentials: true
-  })
-  console.log(response,"response")
-  return response.data;
-}
-
-export const deletewebinar = async(webinarId) =>{
-  const response = await axios.post(`${API_URL}/api/delete-webinar`,{webinarId}, {
-     headers: {
+export const indexwebinar = async () => {
+  const response = await axios.post(`${API_URL}/api/index-webinar`, {}, {
+    headers: {
       'Content-Type': 'application/json'
     },
     withCredentials: true
-  })
+  });
   return response.data;
-}
+};
+
+export const editwebinar = async (webinarId) => {
+  const response = await axios.post(`${API_URL}/api/edit-webinar`, { webinarId }, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  });
+  return response.data;
+};
+
+export const updatewebinar = async (_id,formData) => {
+  const response = await axios.post(`${API_URL}/api/update-webinar`, _id,formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true
+  });
+  return response.data;
+};
+
+export const deletewebinar = async (webinarId) => {
+  const response = await axios.post(`${API_URL}/api/delete-webinar`, { webinarId }, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  });
+  return response.data;
+};
+
+
+//------------------------------------------------------Event authstore---------------------------------------------------------------------
+
+export const createEvent = async(formData) =>{
+  const response = await axios.post(`${API_URL}/api/create-event`,formData,{
+    headers: {
+      'Content-Type':'multipart/form-data'
+    },
+    withCredentials: true
+  });
+  return response.data;
+};
+
+export const indexEvent = async() =>{
+  const response = axios.post(`${API_URL}/api/index-event`,{},{
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials:true
+  });
+  return response.data;
+};
+
+export const deleteEvent = async(eventId) =>{
+  const response = axios.post(`${API_URL}/api/delete-event`,{eventId},{
+    headers: {
+      "Content-Type": 'application/json'
+    },
+    withCredentials: true
+  });
+  return  response.data;
+};
+
+//-------------------------------------------------------------contactusform authstore---------------------------------------------------
+
+export const createcontactusform = async(formData) =>{
+  const response = await axios.post(`${API_URL}/api/create-contactusform`,formData,{
+    headers: {
+      'Content-Type':'application/json'
+    },
+    withCredentials: true
+  });
+  return response.data;
+};
+
+export const indexcontactusform = async() =>{
+  const response = axios.post(`${API_URL}/api/index-contactusform`,{},{
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials:true
+  });
+  return response.data;
+};
+
+export const deletecontactusform = async(contactusformId) =>{
+  const response = axios.post(`${API_URL}/api/delete-contactusform`,{contactusformId},{
+    headers: {
+      "Content-Type": 'application/json'
+    },
+    withCredentials: true
+  });
+  return  response.data;
+};

@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from '../components/admin/Home'
 import Dashboard from '../components/admin/Dasboard'
-import Webinar from '../components/admin/Webinar'
+import WebinarList from '../components/admin/WebinarList'
 import Footer from '../components/admin/Footer'
 import EventList from '../components/admin/EventList'
 import VolunteerList from '../components/admin/VolunteerList'
@@ -68,7 +68,7 @@ const Routers = () => {
 
         <Route path='/' element={<Home />} />
         <Route path="/dashboard" element={<Home><Dashboard /></Home>} />
-        <Route path="/webinar" element={<Home><Webinar /></Home>} />
+        <Route path="/webinar" element={<Home><WebinarList /></Home>} />
           <Route path="/news" element={<Home><NewsList /></Home>} />
           <Route path="/contact-form-list" element={<Home><ContactFormList /></Home>} />
           <Route path="/user-list" element={<Home><UserList /></Home>} />

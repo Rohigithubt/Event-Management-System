@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import noImg from "../../assets/images/no-image.jpg";
 import Footer from '../../components/admin/Footer';
 
-const Seminars = [
+const events = [
   {
     id: 1,
     title: "Zsdas",
@@ -89,40 +89,40 @@ const EventList = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {Seminars.map((seminar) => (
+          {events.map((event) => (
             <div
-              key={seminar.id}
+              key={event.id}
               className="border border-gray-300 rounded-lg p-5 bg-white hover:shadow-lg transition"
             >
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="w-full md:w-40">
                   <img
-                    src={seminar.imageUrl || noImg}
-                    alt="Seminar"
+                    src={event.imageUrl || noImg}
+                    alt="event"
                     className="w-full h-40 object-cover rounded"
                   />
                 </div>
 
                 <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-2">{seminar.title}</h2>
+                  <h2 className="text-xl font-semibold text-gray-800 mb-2">{event.title}</h2>
 
                   <p className="text-sm text-[#DA7821] font-semibold mb-2">
-                    <ion-icon name="calendar-outline"></ion-icon> {seminar.date} - {seminar.endTime}
+                    <ion-icon name="calendar-outline"></ion-icon> {event.date} - {event.endTime}
                   </p>
 
                   <p className="text-sm text-black font-medium mb-2">
                     <ion-icon name="location-outline" className="text-sm text-[#DA7821] mr-1"></ion-icon>
-                    {seminar.location.length > 114
-                      ? `${seminar.location.slice(0, 114)}...`
-                      : seminar.location}
+                    {event.location.length > 114
+                      ? `${event.location.slice(0, 114)}...`
+                      : event.location}
                   </p>
 
                   <p className="text-sm text-gray-500 font-semibold mb-1">
-                    Total Invitations: {seminar.totalinvitaion}
+                    Total Invitations: {event.totalinvitaion}
                   </p>
 
                   <p className="text-sm text-gray-500 font-semibold">
-                    Required Volunteers: {seminar.requiredvolunteer}
+                    Required Volunteers: {event.requiredvolunteer}
                   </p>
                 </div>
               </div>

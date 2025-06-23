@@ -48,6 +48,7 @@ async function indexwebinar(req,res) {
         if(!webinar || webinar.length == 0){
             return res.status(404).json({status:false,message:"Webinar not found"});
         }
+        console.log(webinar,"re")
         return res.status(200).json({status:true,data:webinar});
     }
     catch(error){

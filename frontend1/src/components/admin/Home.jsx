@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Dashboard from './Dasboard';
-import Webinar from './Webinar';
+import WebinarList from './WebinarList';
 import { Outlet } from 'react-router-dom';
 
 const Home = ({ children }) => {
