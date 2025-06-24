@@ -14,6 +14,7 @@ export const CreateEvent = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await createEvent(formData);
+      console.log(object)
       return response;
     } catch (error) {
       return rejectWithValue(
@@ -25,9 +26,10 @@ export const CreateEvent = createAsyncThunk(
 
 export const IndexEvent = createAsyncThunk(
    "index-event",
-   async (_,{rejectWithValue}) =>{
+   async (_id,{rejectWithValue}) =>{
     try{
-      const response = await indexEvent();
+      const response = await indexEvent(_id);
+      console.log(response,"slice response")
       return response;    
     }
     catch(error){

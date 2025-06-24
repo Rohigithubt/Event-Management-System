@@ -5,8 +5,11 @@ import Footer from '../components/admin/Footer';
 import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { CreateContactUsForm } from '../redux/slice/contactusformSlice';
 
 const HomeContactus = () => {
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -20,42 +23,63 @@ const HomeContactus = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    Swal.fire({
-      icon: 'success',
-      title: 'Message Sent!',
-      text: 'We will get back to you soon.',
-    });
-    toast.success('Your message has been submitted!');
-    setForm({ firstName: '', lastName: '', phone: '', email: '', message: '' });
+    
+    try {
+      const formData = {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        phoneno: form.phone,
+        email: form.email,
+        message: form.message
+      };
+
+      const resultAction = await dispatch(CreateContactUsForm(formData));
+      
+      if (CreateContactUsForm.fulfilled.match(resultAction)) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Message Sent!',
+          text: 'We will get back to you soon.',
+        });
+        toast.success('Your message has been submitted!');
+        setForm({ firstName: '', lastName: '', phone: '', email: '', message: '' });
+      } else {
+        const error = resultAction.payload || 'Failed to submit message';
+        toast.error(error);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('An error occurred while submitting the form');
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-50 mt-18">
       <div className="relative h-[300px] md:h-[400px] w-full mb-10">
-              <img
-                src={bannerImg}
-                alt="News Banner"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-between px-6 md:px-16">
-                <h1
-                  className="w-full md:w-1/2 text-[28px] md:text-[40px] font-semibold bg-clip-text text-transparent leading-tight"
-                  style={{
-                    backgroundImage: `url(${bannerImg})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    color: 'black',
-                  }}
-                >
-                  EMSystem: Empowering you to realize your potential through seamless event experiences.
-                </h1>
-                <div className="bg-[#e4f3dd] border-[11px] border-[#e4f3dd] border-b-0 rounded-t-[348px] border-t-[14px] h-[290px] mt-27 ml-auto max-w-[310px] overflow-hidden">
-                  <img src={noImg} alt="Event Illustration" />
-                </div>
-              </div>
-            </div>
+        <img
+          src={bannerImg}
+          alt="News Banner"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-between px-6 md:px-16">
+          <h1
+            className="w-full md:w-1/2 text-[28px] md:text-[40px] font-semibold bg-clip-text text-transparent leading-tight"
+            style={{
+              backgroundImage: `url(${bannerImg})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              color: 'black',
+            }}
+          >
+            EMSystem: Empowering you to realize your potential through seamless event experiences.
+          </h1>
+          <div className="bg-[#e4f3dd] border-[11px] border-[#e4f3dd] border-b-0 rounded-t-[348px] border-t-[14px] h-[290px] mt-27 ml-auto max-w-[310px] overflow-hidden">
+            <img src={noImg} alt="Event Illustration" />
+          </div>
+        </div>
+      </div>
 
       <div className="px-4 sm:px-6 lg:px-16 py-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

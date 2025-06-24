@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 // import { Index, DestroyUserData } from "../../redux/slice/userSlice";
-import { Index,DestroyUserData } from "../../redux/slice/userSlice";
+import { Index, DestroyUserData } from "../../redux/slice/userSlice";
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -57,34 +57,34 @@ const UserList = () => {
   );
 
   const handleDelete = async (_id) => {
-      const result = await Swal.fire({
-        title: "Are you sure?",
-        text: "This user's data will be permanently deleted.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Yes, delete it!",
-      });
-  
-      if (result.isConfirmed) {
-        try {
-          const res = await dispatch(DestroyUserData(_id));
-          if (res?.payload?.status || res?.meta?.requestStatus === "fulfilled") {
-            Swal.fire("Deleted!", "user has been deleted.", "success");
-            dispatch(Index());
-          } else {
-            Swal.fire(
-              "Failed!",
-              res.payload?.message || "Failed to delete volunteer.",
-              "error"
-            );
-          }
-        } catch (error) {
-          Swal.fire("Error!", "Something went wrong during deletion.", "error");
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This user's data will be permanently deleted.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await dispatch(DestroyUserData(_id));
+        if (res?.payload?.status || res?.meta?.requestStatus === "fulfilled") {
+          Swal.fire("Deleted!", "user has been deleted.", "success");
+          dispatch(Index());
+        } else {
+          Swal.fire(
+            "Failed!",
+            res.payload?.message || "Failed to delete volunteer.",
+            "error"
+          );
         }
+      } catch (error) {
+        Swal.fire("Error!", "Something went wrong during deletion.", "error");
       }
-    };
+    }
+  };
 
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -197,14 +197,12 @@ const UserList = () => {
                           >
                             <span className="text-blue-800 font-semibold">Break</span>
                             <div
-                              className={`relative w-12 h-6 flex items-center rounded-full p-1 ${
-                                user.break ? "bg-green-500" : "bg-gray-300"
-                              }`}
+                              className={`relative w-12 h-6 flex items-center rounded-full p-1 ${user.break ? "bg-green-500" : "bg-gray-300"
+                                }`}
                             >
                               <div
-                                className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ${
-                                  user.break ? "translate-x-6" : "translate-x-0"
-                                }`}
+                                className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ${user.break ? "translate-x-6" : "translate-x-0"
+                                  }`}
                               ></div>
                             </div>
                           </button>
@@ -217,7 +215,7 @@ const UserList = () => {
                             <ion-icon name="eye-outline"></ion-icon>
                           </button>
                           <button className="bg-white text-black px-2 py-0 rounded-md mr-2 text-xs hover:bg-[#006AF2] hover:text-white"
-                             onClick={()=>handleDelete(user.id)}>
+                            onClick={() => handleDelete(user.id)}>
                             <ion-icon name="trash-outline"></ion-icon>
                           </button>
                         </td>

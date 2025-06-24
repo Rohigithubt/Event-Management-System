@@ -27,7 +27,7 @@ const SignupHome = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: '' })); // Clear error when user types
+    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = async (e) => {
@@ -40,7 +40,7 @@ const SignupHome = () => {
     }
 
     try {
-      const { confirmPassword, ...dataToSend } = form; 
+      const { confirmPassword, ...dataToSend } = form;
       const res = await dispatch(RegisterUser(dataToSend));
 
       if (RegisterUser.fulfilled.match(res)) {

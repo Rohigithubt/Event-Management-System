@@ -3,7 +3,7 @@ import { createcontactusform, deletecontactusform, indexcontactusform } from "..
 
 const initialState = {
   message: "",
-  event: [],
+  contactusform: [],
   loading: false,
   error: null,
   success: false,
@@ -17,7 +17,7 @@ export const CreateContactUsForm = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data?.message || "Failed to create Event"
+        error.response?.data?.message || "Failed to create Contact form"
       );
     }
   }

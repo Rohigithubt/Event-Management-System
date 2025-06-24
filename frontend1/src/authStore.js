@@ -304,18 +304,19 @@ export const createEvent = async(formData) =>{
   return response.data;
 };
 
-export const indexEvent = async() =>{
-  const response = axios.post(`${API_URL}/api/index-event`,{},{
+export const indexEvent = async(eventId) =>{
+  const response = await axios.post(`${API_URL}/api/index-event`,eventId,{
     headers: {
       'Content-Type': 'application/json'
     },
     withCredentials:true
   });
+  console.log(response.data,"authstore response")
   return response.data;
 };
 
 export const deleteEvent = async(eventId) =>{
-  const response = axios.post(`${API_URL}/api/delete-event`,{eventId},{
+  const response = await axios.post(`${API_URL}/api/delete-event`,{eventId},{
     headers: {
       "Content-Type": 'application/json'
     },
@@ -337,7 +338,7 @@ export const createcontactusform = async(formData) =>{
 };
 
 export const indexcontactusform = async() =>{
-  const response = axios.post(`${API_URL}/api/index-contactusform`,{},{
+  const response = await axios.post(`${API_URL}/api/index-contactusform`,{},{
     headers: {
       'Content-Type': 'application/json'
     },

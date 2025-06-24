@@ -26,6 +26,8 @@ import NewsList from '../components/admin/NewsList'
 import ContactFormList from '../components/admin/ContactFormList'
 import UserList from '../components/admin/UserList'
 import LocationList from '../components/admin/LocationList'
+import UserSidebar from '../components/user/UserSidebar'
+import UserLayout from '../components/user/UserLayout'
 
 
 const Routers = () => {
@@ -34,8 +36,14 @@ const Routers = () => {
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/user-sidebar' element={<UserSidebar />} />
         <Route path='/homepage' element={<HomeHeader />} />
-        
+        <Route path='/user-layout' element={<UserLayout />} />
+
+        <Route path="/user-layout" element={<UserLayout />}>
+          <Route index element={<Dashboard />} />
+        </Route>
+
         <Route path="/home-page" element={<HomePage />}>
           <Route index element={<MainHome />} />
         </Route>

@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 const LocationList = () => {
     const dispatch = useDispatch();
     const { location, loading, error } = useSelector((state) => state.location);
-    console.log(location,"location")
+    console.log(location, "location")
 
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
@@ -151,7 +151,7 @@ const LocationList = () => {
                 <div className="border border-gray-300 p-5 rounded-lg">
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-2xl font-bold text-gray-800">Add New Location</h1>
-                       
+
                     </div>
 
                     <div className="space-y-4">
@@ -238,11 +238,11 @@ const LocationList = () => {
                 <div className="border border-gray-300 p-5 rounded-lg">
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-2xl font-bold text-gray-800">View Location</h1>
-                       
+
                     </div>
 
                     <div className="space-y-4">
-                          
+
                         <div>
                             <p className="font-bold text-xl !mt-10 mb-8">Location Name: <span className="ml-2 font-normal">{selectedLocation.locationName}</span></p>
                             <p className="text-gray-700"></p>

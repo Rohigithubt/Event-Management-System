@@ -18,7 +18,7 @@ const NewsList = () => {
   const [showViewForm, setShowViewForm] = useState(false);
   const [selectedNews, setSelectedNews] = useState(null);
   const [editNewsData, setEditNewsData] = useState(null);
-  
+
   const initialNewsState = {
     title: "",
     content: "",
@@ -26,7 +26,7 @@ const NewsList = () => {
     image: null,
     imagePreview: null
   };
-  
+
   const [newNews, setNewNews] = useState(initialNewsState);
 
   const fileInputRef = useRef();
@@ -39,10 +39,10 @@ const NewsList = () => {
     if (error) toast.error(error);
   }, [error]);
 
-  const filteredNews = Array.isArray(news) 
+  const filteredNews = Array.isArray(news)
     ? news.filter((item) =>
-        item?.title?.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      item?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     : [];
 
   const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
@@ -81,7 +81,7 @@ const NewsList = () => {
   const handleEditClick = async (newsId) => {
     try {
       const res = await dispatch(EditNews(newsId));
-      
+
       if (res.payload?.data) {
         const newsData = res.payload.data;
         setEditNewsData(newsData);
@@ -90,7 +90,7 @@ const NewsList = () => {
           content: newsData.content || "",
           date: newsData.created_at ? newsData.created_at.split('T')[0] : new Date().toISOString().split('T')[0],
           image: null,
-          imagePreview: newsData.image 
+          imagePreview: newsData.image
             ? `${import.meta.env.VITE_API_URL}${newsData.image}`
             : null
         });
@@ -119,7 +119,7 @@ const NewsList = () => {
         id: editNewsData._id,
         data: formData
       }));
-      console.log(res,"resaaa")
+      console.log(res, "resaaa")
 
       if (res.payload?.success || res?.meta?.requestStatus === "fulfilled") {
         toast.success("News updated successfully");
@@ -417,25 +417,25 @@ const NewsList = () => {
                     key={item._id}
                     className="border border-gray-300 rounded-lg p-7 bg-white transition relative"
                   >
-                    <div className="absolute top-4 right-4 flex gap-2">
+                    <div className="absolute top-50 right-4 flex gap-2">
                       <button
                         onClick={() => {
                           setSelectedNews(item);
                           setShowViewForm(true);
                         }}
-                        className="bg-white text-black border border-black p-1 rounded-md hover:bg-[#006AF2] hover:text-white"
+                        className="bg-white text-black border !border-gray-300 rounded-md hover:bg-[#006AF2] hover:text-white"
                       >
                         <ion-icon name="eye-outline"></ion-icon>
                       </button>
                       <button
                         onClick={() => handleEditClick(item._id)}
-                        className="bg-white text-black p-1 rounded-md hover:bg-[#006AF2] hover:text-white"
+                        className="bg-white text-black p-1 border !border-gray-300 rounded-md hover:bg-[#006AF2] hover:text-white"
                       >
                         <ion-icon name="create-outline"></ion-icon>
                       </button>
                       <button
                         onClick={() => handleDelete(item._id)}
-                        className="bg-white text-black p-1 rounded-md hover:bg-[#006AF2] hover:text-white"
+                        className="bg-white text-black p-1 border !border-gray-300 rounded-md hover:bg-[#006AF2] hover:text-white"
                       >
                         <ion-icon name="trash-outline"></ion-icon>
                       </button>

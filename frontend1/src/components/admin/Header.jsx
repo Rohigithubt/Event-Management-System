@@ -29,31 +29,3 @@ const Header = ({ toggleSidebar }) => {
 };
 
 export default Header;
-/*
-
-import React from 'react';
-import { RiMenuLine } from 'react-icons/ri';
-import ProfileDropdown from './ProfileDropdown';
-
-const Header = ({ toggleSidebar }) => {
-  return (
-    <header
-      className="px-4 py-3 flex items-center justify-between text-white"
-      style={{
-        backgroundColor: '#3366ff',
-        boxShadow:
-          '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-      }}
-    >
-      <button onClick={toggleSidebar} className="text-2xl text-white">
-        <RiMenuLine />
-      </button>
-      <ProfileDropdown />
-    </header>
-  );
-};
-
-export default Header;
-
-
-*/

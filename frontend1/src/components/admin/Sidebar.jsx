@@ -7,7 +7,7 @@ import {
   FiBookOpen,
   FiPhone,
   FiLogOut,
-  FiMapPin 
+  FiMapPin
 } from 'react-icons/fi';
 import { MdEventNote, MdNewspaper } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';

@@ -66,12 +66,12 @@ const SeminarList = () => {
     return () => clearInterval(interval);
   }, [seminar]);
 
- const filteredSeminars = Array.isArray(seminar) 
-  ? seminar.filter((item) => 
+  const filteredSeminars = Array.isArray(seminar)
+    ? seminar.filter((item) =>
       item?.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item?.venue?.toLowerCase().includes(searchTerm.toLowerCase())
     )
-  : [];
+    : [];
 
   const totalPages = Math.ceil(filteredSeminars.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -93,7 +93,7 @@ const SeminarList = () => {
         date: new Date(res.payload.data?.date).toISOString().split('T')[0],
         startTime: new Date(res.payload.data?.startTime).toTimeString().substring(0, 5),
         endTime: new Date(res.payload.data?.endTime).toTimeString().substring(0, 5),
-        imageUrl: res.payload.data?.image 
+        imageUrl: res.payload.data?.image
           ? `${import.meta.env.VITE_API_URL}${res.payload?.data.image}`
           : null
       });
@@ -135,8 +135,8 @@ const SeminarList = () => {
 
   const handleAddSeminar = async () => {
     try {
-      if (!newSeminar.title || !newSeminar.ticketPrice || !newSeminar.totalTicket || 
-          !newSeminar.date || !newSeminar.startTime || !newSeminar.endTime || !newSeminar.venue) {
+      if (!newSeminar.title || !newSeminar.ticketPrice || !newSeminar.totalTicket ||
+        !newSeminar.date || !newSeminar.startTime || !newSeminar.endTime || !newSeminar.venue) {
         toast.error("All fields are required");
         return;
       }
@@ -152,13 +152,13 @@ const SeminarList = () => {
       formData.append("startTime", startDateTime);
       formData.append("endTime", endDateTime);
       formData.append("venue", newSeminar.venue);
-      
+
       if (newSeminar.image) {
         formData.append("image", newSeminar.image);
       }
 
       const res = await dispatch(CreateSeminar(formData));
-      
+
       if (res.payload?.status || res?.meta?.requestStatus === "fulfilled") {
         toast.success("Seminar added successfully");
         setShowAddForm(false);
@@ -345,13 +345,13 @@ const SeminarList = () => {
           <div className="space-y-4 p-4 border rounded-md bg-white">
             <div className="flex justify-between items-center mb-6">
               <h1 className="!text-2xl font-bold text-gray-800">View Seminar</h1>
-             
+
             </div>
-            
+
             <div className="flex flex-col md:flex-column gap-6">
               <div className="w-80 h-80 ml-100 mb-9">
                 <img
-                  src={selectedSeminar.image 
+                  src={selectedSeminar.image
                     ? `${import.meta.env.VITE_API_URL}${selectedSeminar.image}`
                     : noImg}
                   alt="Seminar"
@@ -362,40 +362,40 @@ const SeminarList = () => {
                 <h2 className="text-2xl font-bold text-gray-800">
                   {selectedSeminar.title}
                 </h2>
-                
+
                 <div className="space-y-2">
                   <p className="text-sm text-[#DA7821] font-medium">
                     <ion-icon name="location-outline" className="mr-1"></ion-icon>
                     {selectedSeminar.venue}
                   </p>
-                  
+
                   <p className="text-sm text-black font-medium">
                     <ion-icon name="calendar-outline" className="mr-1"></ion-icon>
                     {new Date(selectedSeminar.date).toLocaleDateString()} |{" "}
                     {new Date(selectedSeminar.startTime).toLocaleTimeString()} -{" "}
                     {new Date(selectedSeminar.endTime).toLocaleTimeString()}
                   </p>
-                  
+
                   <p className="text-sm font-medium">
                     <span className="font-semibold">Ticket Price:</span> ${selectedSeminar.ticketPrice}
                   </p>
-                  
+
                   <p className="text-sm font-medium">
                     <span className="font-semibold">Total Tickets:</span> {selectedSeminar.totalTicket}
                   </p>
-                  
+
                   <p className="text-sm font-medium">
                     <span className="font-semibold">Available Tickets:</span> {selectedSeminar.totalTicket}
                   </p>
                 </div>
               </div>
             </div>
-             <button
-                onClick={() => setShowViewModal(false)}
-                className="bg-gray-200 text-black px-4 py-2 ml-120 !rounded-full"
-              >
-                Back
-              </button>
+            <button
+              onClick={() => setShowViewModal(false)}
+              className="bg-gray-200 text-black px-4 py-2 ml-120 !rounded-full"
+            >
+              Back
+            </button>
           </div>
         ) : (
           <>
@@ -418,7 +418,7 @@ const SeminarList = () => {
                     <input
                       type="text"
                       value={newSeminar.title}
-                      onChange={(e) => setNewSeminar({...newSeminar, title: e.target.value})}
+                      onChange={(e) => setNewSeminar({ ...newSeminar, title: e.target.value })}
                       className="w-full px-4 py-2 border border-gray-300 rounded"
                     />
                   </div>
@@ -427,7 +427,7 @@ const SeminarList = () => {
                     <input
                       type="text"
                       value={newSeminar.venue}
-                      onChange={(e) => setNewSeminar({...newSeminar, venue: e.target.value})}
+                      onChange={(e) => setNewSeminar({ ...newSeminar, venue: e.target.value })}
                       className="w-full px-4 py-2 border border-gray-300 rounded"
                     />
                   </div>
@@ -436,7 +436,7 @@ const SeminarList = () => {
                     <input
                       type="number"
                       value={newSeminar.ticketPrice}
-                      onChange={(e) => setNewSeminar({...newSeminar, ticketPrice: e.target.value})}
+                      onChange={(e) => setNewSeminar({ ...newSeminar, ticketPrice: e.target.value })}
                       className="w-full px-4 py-2 border border-gray-300 rounded"
                     />
                   </div>
@@ -445,7 +445,7 @@ const SeminarList = () => {
                     <input
                       type="number"
                       value={newSeminar.totalTicket}
-                      onChange={(e) => setNewSeminar({...newSeminar, totalTicket: e.target.value})}
+                      onChange={(e) => setNewSeminar({ ...newSeminar, totalTicket: e.target.value })}
                       className="w-full px-4 py-2 border border-gray-300 rounded"
                     />
                   </div>
@@ -454,7 +454,7 @@ const SeminarList = () => {
                     <input
                       type="date"
                       value={newSeminar.date}
-                      onChange={(e) => setNewSeminar({...newSeminar, date: e.target.value})}
+                      onChange={(e) => setNewSeminar({ ...newSeminar, date: e.target.value })}
                       className="w-full px-4 py-2 border border-gray-300 rounded"
                     />
                   </div>
@@ -463,7 +463,7 @@ const SeminarList = () => {
                     <input
                       type="time"
                       value={newSeminar.startTime}
-                      onChange={(e) => setNewSeminar({...newSeminar, startTime: e.target.value})}
+                      onChange={(e) => setNewSeminar({ ...newSeminar, startTime: e.target.value })}
                       className="w-full px-4 py-2 border border-gray-300 rounded"
                     />
                   </div>
@@ -472,7 +472,7 @@ const SeminarList = () => {
                     <input
                       type="time"
                       value={newSeminar.endTime}
-                      onChange={(e) => setNewSeminar({...newSeminar, endTime: e.target.value})}
+                      onChange={(e) => setNewSeminar({ ...newSeminar, endTime: e.target.value })}
                       className="w-full px-4 py-2 border border-gray-300 rounded"
                     />
                   </div>
@@ -525,7 +525,7 @@ const SeminarList = () => {
                 </button>
               </div>
             </div>
-            
+
             <div className="flex flex-wrap items-center gap-4 mb-6">
               <div className="flex items-center gap-2">
                 <p>Show</p>
@@ -566,9 +566,8 @@ const SeminarList = () => {
                   return (
                     <div
                       key={seminarItem._id}
-                      className={`relative border border-gray-300 rounded-lg h-auto p-5 bg-white transition ${
-                        isExpired ? "opacity-50" : ""
-                      }`}
+                      className={`relative border border-gray-300 rounded-lg h-auto p-5 bg-white transition ${isExpired ? "opacity-50" : ""
+                        }`}
                     >
                       <div className="absolute -bottom-3 right-3 flex gap-1">
                         {!isExpired && (
@@ -594,9 +593,8 @@ const SeminarList = () => {
                         )}
                         <button
                           onClick={() => handleDelete(seminarItem._id)}
-                          className={`bg-white ${
-                            isExpired ? "text-red-600" : "text-gray-600"
-                          } border border-gray-300 p-1.5 rounded-full hover:bg-[#006AF2] hover:text-white shadow-md`}
+                          className={`bg-white ${isExpired ? "text-red-600" : "text-gray-600"
+                            } border border-gray-300 p-1.5 rounded-full hover:bg-[#006AF2] hover:text-white shadow-md`}
                           title="Delete"
                         >
                           <ion-icon name="trash-outline" class="text-sm"></ion-icon>
