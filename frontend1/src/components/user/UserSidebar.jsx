@@ -2,6 +2,8 @@ import React from 'react';
 import {
   FiHome,
   FiVideo,
+  FiUser,
+  FiBell,
   FiLogOut
 } from 'react-icons/fi';
 import { NavLink } from 'react-router-dom';
@@ -22,7 +24,7 @@ const UserSidebar = () => {
 
         <li>
           <NavLink
-            to="/webinar"
+            to="/user/webinar"
             className="flex items-center gap-4 py-3 px-5 h-17 rounded-full duration-200 bg-[#F5F7F9] text-black hover:bg-[#006AF2] hover:!text-white"
           >
             <FiVideo className="text-xl" />
@@ -32,20 +34,20 @@ const UserSidebar = () => {
 
         <li>
           <NavLink
-            to="/webinar"
+            to="/user/notification"
             className="flex items-center gap-4 py-3 px-5 h-17 rounded-full duration-200 bg-[#F5F7F9] text-black hover:bg-[#006AF2] hover:!text-white"
           >
-            <FiVideo className="text-xl" />
+            <FiBell className="text-xl" />
             <span className="text-md">Notification</span>
           </NavLink>
         </li>
 
         <li>
           <NavLink
-            to="/webinar"
+            to="/user/profile-setting"
             className="flex items-center gap-4 py-3 px-5 h-17 rounded-full duration-200 bg-[#F5F7F9] text-black hover:bg-[#006AF2] hover:!text-white"
           >
-            <FiVideo className="text-xl" />
+            <FiUser className="text-xl" />
             <span className="text-md">Profile Settings</span>
           </NavLink>
         </li>

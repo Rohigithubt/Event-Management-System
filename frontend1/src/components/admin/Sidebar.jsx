@@ -155,7 +155,7 @@ const Sidebar = ({ isOpen }) => {
 
         <li>
           <NavLink
-            to="#"
+            to="/logout"
             className="flex items-center gap-4 py-3 px-5 h-17 bg-[#F5F7F9] text-black hover:bg-[#006AF2] hover:!text-white rounded-full duration-200"
           >
             <FiLogOut className="text-xl" />

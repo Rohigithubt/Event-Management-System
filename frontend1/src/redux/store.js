@@ -6,6 +6,7 @@ import seminarSlice from "../redux/slice/seminarSlice"
 import webinarSlice from "../redux/slice/webinarSlice";
 import eventSlice from "../redux/slice/eventSlice"
 import contactusformSlice from "../redux/slice/contactusformSlice"
+import usernotificationSlice from "../redux/slice/usernotificationSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
     seminar:seminarSlice,
     webinar:webinarSlice,
     event:eventSlice,
-    contactusform:contactusformSlice
+    contactusform:contactusformSlice,
+    usernotification: usernotificationSlice,
   }
 });
 

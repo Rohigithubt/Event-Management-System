@@ -47,7 +47,7 @@ export const editprofile = async ({ userId }) => {
 }
 
 export const updateprofile = async (profileData) => {
-  const token = localStorage.getItem('token'); // Get token from storage
+  const token = localStorage.getItem('token'); 
   const response = await axios.post(`${API_URL}/api/updateprofile`, profileData, {
     headers: {
       'Content-Type': 'application/json',
@@ -355,4 +355,27 @@ export const deletecontactusform = async(contactusformId) =>{
     withCredentials: true
   });
   return  response.data;
+};
+
+
+//------------------------------------------------usernotification Authstore---------------------------------------------------
+
+export const indexNotification = async() =>{
+  const response = await axios.post(`${API_URL}/api/index-usernotification`,{},{
+     headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials:true
+  });
+  return response.data;
+};
+
+export const deleteNotification = async(usernotificationId) =>{
+  const response = axios.post(`${API_URL}/api/delete-usernotification`,{usernotificationId},{
+     headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials:true
+  });
+  return response.data;
 };

@@ -9,6 +9,7 @@ const initialState = {
   success: null,
   token: null,
   profile: null,
+  _id: ""
 };
 
 export const Index = createAsyncThunk("index", async (userId, { rejectWithValue }) => {
@@ -34,6 +35,9 @@ export const RegisterUser = createAsyncThunk("register", async (registerData, { 
 export const LoginUser = createAsyncThunk("login", async (loginData, { rejectWithValue }) => {
   try {
     const response = await login(loginData);
+    console.log(response,"respo")
+    localStorage.setItem("_id", response.user._id);
+
     return response;
   } catch (error) {
     const message = error.response?.data?.message || "Login failed";
@@ -124,7 +128,9 @@ const userSlice = createSlice({
         state.message = action.payload.message;
         state.name = action.payload.name;
         state.token = action.payload.token;
+        state._id = action.payload.userId;
         localStorage.setItem("token", action.payload.token);
+
       })
       .addCase(LoginUser.rejected, (state, action) => {
         state.loading = false;

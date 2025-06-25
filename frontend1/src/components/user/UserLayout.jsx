@@ -1,13 +1,18 @@
 import React from 'react'
 import UserSidebar from './UserSidebar'
 import HomeHeader from '../../homepage/HomeHeader'
+import { Outlet } from 'react-router-dom'
 
-const UserLayout = ({children}) => {
+const UserLayout = () => {
   return (
-    <div className="flex h-screen overflow-hidden ml-0">
-      <UserSidebar />
+    <div className="flex flex-col min-h-screen">
       <HomeHeader />
-       <main className="p-4 bg-white h-full flex overflow-auto"> <div className="flex flex-col flex-1 transition-all duration-300 ml-74"> {children}</div></main>
+      <UserSidebar />
+      <main className="p-4 bg-white h-full flex overflow-auto">
+        <div className='flex flex-col flex-1 transition-all duration-300 ml-74 mt-15'>
+        <Outlet />
+        </div>
+      </main>
     </div>
   )
 }

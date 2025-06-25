@@ -28,6 +28,9 @@ import UserList from '../components/admin/UserList'
 import LocationList from '../components/admin/LocationList'
 import UserSidebar from '../components/user/UserSidebar'
 import UserLayout from '../components/user/UserLayout'
+import UserWebinar from '../components/user/UserWebinar'
+import UserNotification from '../components/user/UserNotification'
+import UserProfileSetting from '../components/user/UserProfileSetting'
 
 
 const Routers = () => {
@@ -38,12 +41,7 @@ const Routers = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/user-sidebar' element={<UserSidebar />} />
         <Route path='/homepage' element={<HomeHeader />} />
-        <Route path='/user-layout' element={<UserLayout />} />
-
-        <Route path="/user-layout" element={<UserLayout />}>
-          <Route index element={<Dashboard />} />
-        </Route>
-
+      
         <Route path="/home-page" element={<HomePage />}>
           <Route index element={<MainHome />} />
         </Route>
@@ -89,6 +87,23 @@ const Routers = () => {
 
 
         <Route path="*" element={<Notfound />} />
+
+/* -------------------------------------------------------User Routing-----------------------------------------------------------------------*/
+
+       <Route path='/user/layout' element={<UserLayout />} />
+
+        <Route path="/user/webinar" element={<UserLayout />}>
+          <Route index element={<UserWebinar />} />
+        </Route>
+
+         <Route path="/user/notification" element={<UserLayout />}>
+          <Route index element={<UserNotification />} />
+        </Route>
+
+        <Route path="/user/profile-setting" element={<UserLayout />}>
+          <Route index element={<UserProfileSetting />} />
+        </Route>
+
 
 
       </Routes>
