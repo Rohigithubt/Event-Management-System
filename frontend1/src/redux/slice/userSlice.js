@@ -83,6 +83,21 @@ export const DestroyUserData = createAsyncThunk(
   }
   });
   
+  export const LogOut = createAsyncThunk(
+  "logout",
+  async (_, { rejectWithValue }) => {  
+    try {
+      const response = await logout();
+      console.log(response,"reeeee")
+      localStorage.removeItem('token');
+      localStorage.removeItem('_id');
+      return response;
+    } catch (error) {
+      const message = error.response?.data?.message || "Logout Error";
+      return rejectWithValue(message);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -185,6 +200,19 @@ const userSlice = createSlice({
   state.message = action.payload.message;
 })
 .addCase(DestroyUserData.rejected, (state, action) => {
+  state.loading = false;
+  state.error = action.payload;
+})
+
+ .addCase(LogOut.pending, (state) => {
+  state.loading = true;
+})
+.addCase(LogOut.fulfilled, (state, action) => {
+  state.loading = false;
+  state.success = true;
+  state.message = action.payload.message;
+})
+.addCase(LogOut.rejected, (state, action) => {
   state.loading = false;
   state.error = action.payload;
 })

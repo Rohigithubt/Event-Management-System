@@ -7,6 +7,7 @@ const UserProfileSetting = () => {
   const dispatch = useDispatch();
   const { user, loading, error, success } = useSelector((state) => state.user);
   const userId = localStorage.getItem('_id');
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   const [form, setForm] = useState({
     name: '',
@@ -19,6 +20,9 @@ const UserProfileSetting = () => {
     newPassword: '',
     confirmPassword: '',
   });
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState('');
 
   useEffect(() => {
     if (userId) {
@@ -33,8 +37,12 @@ const UserProfileSetting = () => {
         email: user.email || '',
         phoneno: user.phoneno || '',
       });
+      if (user.image) {
+        setPreviewImage(`${VITE_API_URL}/${user.image}`);
+      }
     }
   }, [user]);
+  
 
   useEffect(() => {
     if (error) toast.error(error);
@@ -51,6 +59,14 @@ const UserProfileSetting = () => {
     setPasswords((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
+  };
+
   const handleUpdate = () => {
     if (passwords.newPassword !== passwords.confirmPassword) {
       toast.error('New passwords do not match');
@@ -61,28 +77,47 @@ const UserProfileSetting = () => {
       return;
     }
 
- 
-    const payload = {
-    userId,
-    ...form,
-    ...(passwords.newPassword && {
-      password: passwords.newPassword 
-    })
-  };
+    const formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('name', form.name);
+    formData.append('email', form.email);
+    formData.append('phoneno', form.phoneno);
+    if (selectedImage) {
+      formData.append('image', selectedImage);
+    }
+    if (passwords.newPassword) {
+      formData.append('password', passwords.newPassword);
+    }
 
-    dispatch(UpdateUserProfile(payload));
+    dispatch(UpdateUserProfile(formData));
   };
 
   return (
     <div className="p-4 sm:p-6 !space-y-5 ml-5 mt-4 max-w-screen-2xl border border-gray-300 rounded-2xl">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-10">
         <div className="flex flex-col items-center bg-gray-50 p-6 rounded-lg -mt-87 ml-10 border w-full md:w-1/4">
-          <div className="w-40 h-40 rounded-full border-4 border-gray-300 flex items-center justify-center">
-            <svg className="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0H4.5z" />
-            </svg>
+          <div className="w-40 h-40 rounded-full border-4 border-gray-300 flex items-center justify-center overflow-hidden">
+            {previewImage ? (
+              <img 
+                src={previewImage} 
+                alt="Profile" 
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <svg className="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0H4.5z" />
+              </svg>
+            )}
           </div>
-          <button className="">Edit Profile Picture</button>
+          <label className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-full cursor-pointer font-bold shadow hover:bg-blue-700 transition">
+            Edit Profile Picture
+            <input 
+              type="file" 
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </label>
         </div>
 
         <div className="w-full md:w-2/3 space-y-6 rounded-lg p-6">
@@ -103,7 +138,7 @@ const UserProfileSetting = () => {
             </div>
           ))}
 
-          <h2 className="text-xl font-semibold border-b-2 border-blue-500 inline-block text-gray-800 pt-24">Change Password</h2>
+          <h2 className="text-xl font-semibold border-b-2 border-blue-500 inline-block text-gray-800 pt-6">Change Password</h2>
 
           {['oldPassword', 'newPassword', 'confirmPassword'].map((field) => (
             <div key={field} className="flex flex-col sm:flex-row items-center">

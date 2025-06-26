@@ -31,6 +31,7 @@ import UserLayout from '../components/user/UserLayout'
 import UserWebinar from '../components/user/UserWebinar'
 import UserNotification from '../components/user/UserNotification'
 import UserProfileSetting from '../components/user/UserProfileSetting'
+import VolunteerLayout from '../components/volunteer/VolunteerLayout'
 
 
 const Routers = () => {
@@ -105,6 +106,10 @@ const Routers = () => {
         </Route>
 
 
+
+/*--------------------------------------------------------Volunteer Routing---------------------------------------------------------------- */
+
+ <Route path='/volunteer/layout' element={<VolunteerLayout />} />
 
       </Routes>
     </>

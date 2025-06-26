@@ -50,14 +50,13 @@ export const updateprofile = async (profileData) => {
   const token = localStorage.getItem('token'); 
   const response = await axios.post(`${API_URL}/api/updateprofile`, profileData, {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${token}`
     },
     withCredentials: true
   });
   return response.data;
 }
-
 export const destroy = async (userId) => {
   const response = await axios.post(`${API_URL}/api/destroy`, { userId }, {
 
@@ -379,3 +378,14 @@ export const deleteNotification = async(usernotificationId) =>{
   });
   return response.data;
 };
+
+export const logout = async() =>{
+  console.log(response,"reff")
+  const response = await axios.post(`${API_URL}/api/logout`,{},{
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials:true
+  });
+  return response.data;
+}
